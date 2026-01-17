@@ -25,13 +25,13 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
 
-    public float Collectable_remaining = 2;
-    public float door_power = 2;
-    float Timer = 0;
+    public float Targets_Remaining = 3;
+    //public float door_power = 2;
+    float Timer = 30;
 
-    Vector3 new_room_trigger_pos;
+    //Vector3 new_room_trigger_pos;
     [Header("Text")]
-    [SerializeField] TMP_Text Collectable_Text;
+    [SerializeField] TMP_Text Targets_Text;
     [SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Time_Text;
     [SerializeField] TMP_Text Best_time_Text;
@@ -41,7 +41,9 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         //new_room_trigger_pos = transform.position;
-        //Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
+        GameObject targets = GameObject.Find("Targets");
+        Targets_Remaining = targets.transform.childCount;
+        Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
         //Game_Controller = FindAnyObjectByType<Game_Controller>();
         //Audio_Manager = FindAnyObjectByType<Audio_Manager>();
@@ -56,8 +58,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         Other_Actions();
-        //Timer += Time.deltaTime;
-        //Timer_Text.text = Timer.ToString("F2");    
+        Timer -= Time.deltaTime;
+        Timer_Text.text = Timer.ToString("F2");
     }
 
     private void Other_Actions()
@@ -94,6 +96,8 @@ public class Player : MonoBehaviour
             if (hit_GO.CompareTag("Target"))
             {
                 hit_GO.SetActive(false);
+                Targets_Remaining--;
+                Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
             }
         }
         else
@@ -125,7 +129,7 @@ public class Player : MonoBehaviour
     //    else if (other.CompareTag("New_Room"))
     //    {
     //        new_room_trigger_pos = other.transform.position;
-    //        Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
+    //        Targets_Text.text = "Collectable Remaining: " + (Targets_Remaining);
     //    }
     //    else if (other.CompareTag("Death"))
     //    {
@@ -159,7 +163,7 @@ public class Player : MonoBehaviour
 
     public void Collect()
     {
-        Collectable_remaining--;
-        Collectable_Text.text = "Collectable Remaining: " + (Collectable_remaining);
+        Targets_Remaining--;
+        Targets_Text.text = "Collectable Remaining: " + (Targets_Remaining);
     }
 }
