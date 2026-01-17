@@ -85,12 +85,15 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100))
         {
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
-            Debug.Log("green");
+            GameObject hit_GO = hit.collider.gameObject;
+            if (hit_GO.CompareTag("Target"))
+            {
+                hit_GO.SetActive(false);
+            }
         }
         else
         {
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * 10, Color.red, 1);
-            Debug.Log("red");
         }
 
     }
