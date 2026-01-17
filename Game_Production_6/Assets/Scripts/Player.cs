@@ -9,9 +9,10 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject End_Screen;
     [SerializeField] GameObject Gameplay_UI;
     [SerializeField] Player_Movement Player_Movement;
-    [SerializeField] ParticleSystem Collected_Particle;
-    [SerializeField] ParticleSystem To_Power_Door;
+    //[SerializeField] ParticleSystem Collected_Particle;
+    //[SerializeField] ParticleSystem To_Power_Door;
     [SerializeField] ParticleSystem Player_Death;
+    [SerializeField] LineRenderer shoot_effect;
     //[SerializeField] InputActionAsset input_actions;
     
     [SerializeField] GameObject Bullet;
@@ -85,6 +86,10 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100))
         {
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
+            //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
+            shoot_effect.SetPosition(0, Fire_Point.position);
+            shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
+            //Destroy(shot_effect_inst, 1);
             GameObject hit_GO = hit.collider.gameObject;
             if (hit_GO.CompareTag("Target"))
             {
@@ -93,7 +98,11 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * 10, Color.red, 1);
+            Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * 100, Color.red, 1);
+            //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
+            shoot_effect.SetPosition(0, Fire_Point.position);
+            shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
+            //Destroy(shot_effect_inst, 1);
         }
 
     }
