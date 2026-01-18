@@ -13,7 +13,7 @@ public class Change_Scene : MonoBehaviour
     void Start()
     {
         Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
-        Audio_Manager = GameObject.Find("Audio_Manager").GetComponent<Audio_Manager>();
+        //Audio_Manager = GameObject.Find("Audio_Manager").GetComponent<Audio_Manager>();
     }
 
     void Update()
@@ -36,18 +36,17 @@ public class Change_Scene : MonoBehaviour
 
     public void Scene_To_Load(string name)
     {
-        Audio_Manager.Play_SFX_Button_Pressed();
         if (name == "How_Play" || name == "Controls")
         {
             Audio_Manager.Play_Music(Audio_Manager.Other_Menu);
-            Game_Controller.Best_time_Text.gameObject.SetActive(false);
+            //Game_Controller.Best_time_Text.gameObject.SetActive(false);
             Setting_Buttons_Not_In_Game();
         }
         else if (name == "Main_Menu")
         {
             Audio_Manager.Stop_Music();
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
-            Game_Controller.Best_time_Text.gameObject.SetActive(true);
+            //Game_Controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
             Game_Controller.lock_mouse = false;
             Setting_Buttons_Not_In_Game();
@@ -56,12 +55,13 @@ public class Change_Scene : MonoBehaviour
         else if (name == "Game_Scene")
         {
             Audio_Manager.Play_Music(Audio_Manager.Gameplay);
-            Game_Controller.Best_time_Text.gameObject.SetActive(false);
+            //Game_Controller.Best_time_Text.gameObject.SetActive(false);
             Game_Controller.lock_mouse = true;
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = Game_Controller.Setting_BG_visible;
             Setting_Buttons_In_Game();
         }
         SceneManager.LoadScene(name);
+        Audio_Manager.Play_SFX_Button_Pressed();
 
         //else if (name != "Main_Menu")
         //{

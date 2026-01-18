@@ -14,9 +14,9 @@ public class Game_Controller : MonoBehaviour
     public GameObject Close_button;
     public GameObject Resume_button;
     public GameObject To_Main_Menu_button;
-    public TMP_Text Best_time_Text;
+    //public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
-    public float Best_time = 0; // int.MaxValue
+    //public float Best_time = 0; // int.MaxValue
     public bool lock_mouse = false;
     public bool can_open_setting = true;
     bool is_setting_active = false;
@@ -44,7 +44,7 @@ public class Game_Controller : MonoBehaviour
 
     private void Start()
     {
-        Load_Best_Time();
+        //Load_Best_Time();
     }
 
     void Update()
@@ -96,17 +96,17 @@ public class Game_Controller : MonoBehaviour
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
     }
 
-    public void Load_Best_Time()
-    {
-        if (PlayerPrefs.HasKey("Best_Time"))
-        {
-            Best_time = PlayerPrefs.GetFloat("Best_Time");
-            if (Best_time != 0)
-            {
-                Best_time_Text.text = "Best Time: " + Best_time.ToString("F2");
-            }
-        }
-    }
+    //public void Load_Best_Time()
+    //{
+    //    if (PlayerPrefs.HasKey("Best_Time"))
+    //    {
+    //        Best_time = PlayerPrefs.GetFloat("Best_Time");
+    //        if (Best_time != 0)
+    //        {
+    //            Best_time_Text.text = "Best Time: " + Best_time.ToString("F2");
+    //        }
+    //    }
+    //}
 
     //public void Close_Settings()
     //{

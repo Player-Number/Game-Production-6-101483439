@@ -282,12 +282,12 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WASD - Move
 
-    Space - Jump/Wall Hop
+    Space - Jump
 
-    Right Click - Dash
+    Right Click - Shoot
 
-    P
-    - Pause/Open Settings
+    P - Pause/Open
+    Settings
 
     0 (Zero) - Respawn'
   m_isRightToLeft: 0

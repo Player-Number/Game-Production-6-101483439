@@ -280,20 +280,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Collect all the collectables in the room to advance to the next room.
-    The goal is to beat the whole game as fast as possible (your best time aka lowest
-    time will be displayed).
-
-
-    Press right click to dash; you will dash in the
-    direction that you are facing. Dashing has a cooldown of 2 sec.
-
-
-    Pressing
-    the jump button while airborne and near a wall will make you do a wall hop, which
-    is basically another jump (you will only have 1 wall hop, resets upon being grounded)
-
-'
+  m_text: "Shoot all the targets in levels within the time limit to beat it. The
+    next level will be unlocked after beating the previous one. \r\n\r\nThere are
+    extra objectives in all the levels if you want a challenge. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
