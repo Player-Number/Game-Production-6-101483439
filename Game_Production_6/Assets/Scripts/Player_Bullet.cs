@@ -12,4 +12,19 @@ public class Player_Bullet : MonoBehaviour
     {
         transform.position += transform.forward * speed;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Target"))
+        {
+            other.gameObject.SetActive(false);
+            Destroy(gameObject);
+            FindAnyObjectByType<Player>().Shot_Target();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }

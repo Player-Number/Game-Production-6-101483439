@@ -68,15 +68,11 @@ public class Player : MonoBehaviour
         {
             Shooting();
             //GameObject player_bullet = Instantiate(Bullet, Camera.main.transform.position, Camera.main.transform.localRotation);
-
         }
-
-        //if (Input.GetKeyDown(KeyCode.Alpha0))
-        //    transform.position = new(new_room_trigger_pos.x, new_room_trigger_pos.y + 1, new_room_trigger_pos.z);
-
-            //else if (Input.GetKeyDown(KeyCode.Alpha9)) // win
-            //    transform.position = new(0, 2, 210);
-
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Shot_Target();
+        }
             //else if (Input.GetKeyDown(KeyCode.R))
             //    Door.GetComponent<Door>().enabled = true;
     }
@@ -96,8 +92,7 @@ public class Player : MonoBehaviour
             if (hit_GO.CompareTag("Target"))
             {
                 hit_GO.SetActive(false);
-                Targets_Remaining--;
-                Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
+                Shot_Target();
             }
         }
         else
@@ -108,7 +103,6 @@ public class Player : MonoBehaviour
             shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
             //Destroy(shot_effect_inst, 1);
         }
-
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -161,9 +155,16 @@ public class Player : MonoBehaviour
     //    }
     //}
 
-    public void Collect()
+    public void Shot_Target()
     {
         Targets_Remaining--;
-        Targets_Text.text = "Collectable Remaining: " + (Targets_Remaining);
+        Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
+        if (Targets_Remaining <= 0)
+        {
+            End_Screen.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
     }
 }

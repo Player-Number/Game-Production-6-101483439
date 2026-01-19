@@ -36,6 +36,7 @@ public class Change_Scene : MonoBehaviour
 
     public void Scene_To_Load(string name)
     {
+        SceneManager.LoadScene(name);
         if (name == "How_Play" || name == "Controls")
         {
             Audio_Manager.Play_Music(Audio_Manager.Other_Menu);
@@ -60,7 +61,7 @@ public class Change_Scene : MonoBehaviour
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = Game_Controller.Setting_BG_visible;
             Setting_Buttons_In_Game();
         }
-        SceneManager.LoadScene(name);
+        //SceneManager.LoadScene(name);
         Audio_Manager.Play_SFX_Button_Pressed();
 
         //else if (name != "Main_Menu")

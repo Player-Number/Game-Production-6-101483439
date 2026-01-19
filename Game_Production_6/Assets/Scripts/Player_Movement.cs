@@ -79,7 +79,7 @@ public class Player_Movement : MonoBehaviour
     void Update()
     {
         Player_Input();
-        //FOV_based_on_Speed();
+        FOV_based_on_Speed();
         State_Handler();
         Move_Cap();
         //if (Input.GetKeyDown(KeyCode.Mouse1))
