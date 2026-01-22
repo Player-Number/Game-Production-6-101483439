@@ -834,7 +834,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4784279335387161441, guid: da03ef12699329b4298948b719a4b45d, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 23aa88fe2b88d7b40a60ecabb526f53f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 910d8bea725a27148af10ad9fd39999a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -7431,7 +7431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1985562842
 Transform:
   m_ObjectHideFlags: 0
@@ -7465,12 +7465,11 @@ MonoBehaviour:
   Music_Audio_Source: {fileID: 603962864}
   SFX_Audio_Source: {fileID: 2135975082}
   SFX_Button_Pressed: {fileID: 132672562}
-  Main_Menu: {fileID: 8300000, guid: 04b89334aa69fd348a1ff82721fa5003, type: 3}
-  Gameplay: {fileID: 8300000, guid: 6ee7f792b27a4624083639b93ca737a5, type: 3}
-  Other_Menu: {fileID: 8300000, guid: c58c2a1911198fe43a1bb1d557519455, type: 3}
-  Win_OST: {fileID: 8300000, guid: 740b35eb0357c174988c7d0e7293826d, type: 3}
-  Collecting: {fileID: 8300000, guid: 41ccbe71e4fa0c14f8bccd3ee42fd27d, type: 3}
-  Door_Open: {fileID: 8300000, guid: f149772867d3f974f8f9a33138023c34, type: 3}
+  Main_Menu: {fileID: 8300000, guid: 625b5e8b81bc06a4ab1b4e3613a6a580, type: 3}
+  Gameplay: {fileID: 8300000, guid: 8b56195b14a052f4996746568a456de9, type: 3}
+  Other_Menu: {fileID: 8300000, guid: b61be8dc45c30bf43a6aad21e17563b8, type: 3}
+  Win_OST: {fileID: 8300000, guid: 99fc13b3029d6ab4b9c7fcea03bef23c, type: 3}
+  Shooting: {fileID: 8300000, guid: 595eac2c1d9899247bda7925147ee5b9, type: 3}
 --- !u!1 &2026506481
 GameObject:
   m_ObjectHideFlags: 0

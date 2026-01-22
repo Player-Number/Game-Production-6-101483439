@@ -13,7 +13,7 @@ public class Change_Scene : MonoBehaviour
     void Start()
     {
         Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
-        //Audio_Manager = GameObject.Find("Audio_Manager").GetComponent<Audio_Manager>();
+        Audio_Manager = GameObject.Find("Audio_Manager").GetComponent<Audio_Manager>();
     }
 
     void Update()
@@ -53,14 +53,14 @@ public class Change_Scene : MonoBehaviour
             Setting_Buttons_Not_In_Game();
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
         }
-        else if (name == "Game_Scene")
-        {
-            Audio_Manager.Play_Music(Audio_Manager.Gameplay);
-            //Game_Controller.Best_time_Text.gameObject.SetActive(false);
-            Game_Controller.lock_mouse = true;
-            //GameObject.Find("Panel_BG").GetComponent<Image>().material = Game_Controller.Setting_BG_visible;
-            Setting_Buttons_In_Game();
-        }
+        //else if (name == "Game_Scene")
+        //{
+        //    Audio_Manager.Play_Music(Audio_Manager.Gameplay);
+        //    //Game_Controller.Best_time_Text.gameObject.SetActive(false);
+        //    Game_Controller.lock_mouse = true;
+        //    //GameObject.Find("Panel_BG").GetComponent<Image>().material = Game_Controller.Setting_BG_visible;
+        //    Setting_Buttons_In_Game();
+        //}
         //SceneManager.LoadScene(name);
         Audio_Manager.Play_SFX_Button_Pressed();
 
@@ -103,7 +103,7 @@ public class Change_Scene : MonoBehaviour
         //Game_Controller.disable_pause = true;
     }
 
-    void Setting_Buttons_In_Game()
+    public void Setting_Buttons_In_Game()
     {
         Game_Controller.Close_button.SetActive(false);
         Game_Controller.Resume_button.SetActive(true);

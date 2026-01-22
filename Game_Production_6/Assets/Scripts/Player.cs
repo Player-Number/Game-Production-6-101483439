@@ -45,8 +45,11 @@ public class Player : MonoBehaviour
         Targets_Remaining = targets.transform.childCount;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
-        //Game_Controller = FindAnyObjectByType<Game_Controller>();
-        //Audio_Manager = FindAnyObjectByType<Audio_Manager>();
+        Game_Controller = FindAnyObjectByType<Game_Controller>();
+        Audio_Manager = FindAnyObjectByType<Audio_Manager>();
+        Audio_Manager.Play_Music(Audio_Manager.Gameplay);
+        Game_Controller.lock_mouse = true;
+        FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         //if (Game_Controller.Best_time != 0)
         //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         //else
@@ -80,7 +83,7 @@ public class Player : MonoBehaviour
     void Shooting()
     {
         RaycastHit hit;
-
+        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100))
         {
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
@@ -111,7 +114,7 @@ public class Player : MonoBehaviour
     //    {
     //        Collect();
     //        other.gameObject.SetActive(false);
-    //        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Collecting);
+    //        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
     //        ParticleSystem Collected_Particle_inst = Instantiate(Collected_Particle, other.transform.position, Quaternion.identity);
     //        if (!Collected_Particle_inst.isEmitting)
     //        {

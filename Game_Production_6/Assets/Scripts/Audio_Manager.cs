@@ -13,8 +13,7 @@ public class Audio_Manager : MonoBehaviour
     public AudioClip Win_OST;
 
     [Header("SFX")]
-    public AudioClip Collecting;
-    public AudioClip Door_Open;
+    public AudioClip Shooting;
     //public AudioClip Button_Pressed;
     //public AudioClip Win;
 
