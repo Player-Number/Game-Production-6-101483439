@@ -4,9 +4,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] Camera Gameplay_Cam;
-    [SerializeField] Camera Win_Cam;
+    //[SerializeField] Camera Win_Cam;
     [SerializeField] GameObject Pause_Menu;
-    [SerializeField] GameObject End_Screen;
+    [SerializeField] GameObject Win_Screen;
+    [SerializeField] GameObject Lose_Screen;
     [SerializeField] GameObject Gameplay_UI;
     [SerializeField] Player_Movement Player_Movement;
     //[SerializeField] ParticleSystem Collected_Particle;
@@ -18,18 +19,18 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Fire_Point;
 
-    public GameObject Door;
+    //public GameObject Door;
 
     Game_Controller Game_Controller;
     Audio_Manager Audio_Manager;
 
-    Rigidbody rb;
+    //Rigidbody rb;
 
     public float Targets_Remaining = 3;
+    [SerializeField] float Timer = 30;
     //public float door_power = 2;
-    float Timer = 30;
-
     //Vector3 new_room_trigger_pos;
+
     [Header("Text")]
     [SerializeField] TMP_Text Targets_Text;
     [SerializeField] TMP_Text Timer_Text;
@@ -39,7 +40,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         //new_room_trigger_pos = transform.position;
         GameObject targets = GameObject.Find("Targets");
         Targets_Remaining = targets.transform.childCount;
@@ -63,6 +64,14 @@ public class Player : MonoBehaviour
         Other_Actions();
         Timer -= Time.deltaTime;
         Timer_Text.text = Timer.ToString("F2");
+        if (Timer <= 0)
+        {
+            Lose_Screen.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            Timer_Text.text = "00.00";
+        }
     }
 
     private void Other_Actions()
@@ -137,7 +146,7 @@ public class Player : MonoBehaviour
     //    }
     //    else if (other.gameObject.name == "Win_Trigger")
     //    {
-    //        End_Screen.SetActive(true);
+    //        Win_Screen.SetActive(true);
     //        Gameplay_UI.SetActive(false);
     //        Gameplay_Cam.gameObject.SetActive(false);
     //        Win_Cam.gameObject.SetActive(true);
@@ -164,7 +173,7 @@ public class Player : MonoBehaviour
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         if (Targets_Remaining <= 0)
         {
-            End_Screen.SetActive(true);
+            Win_Screen.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
