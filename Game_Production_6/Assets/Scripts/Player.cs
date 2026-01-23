@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class Player : MonoBehaviour
     //[SerializeField] Camera Win_Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Win_Screen;
-    [SerializeField] GameObject Lose_Screen;
     [SerializeField] GameObject Gameplay_UI;
     [SerializeField] Player_Movement Player_Movement;
     //[SerializeField] ParticleSystem Collected_Particle;
@@ -18,22 +18,22 @@ public class Player : MonoBehaviour
     
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Fire_Point;
-
-    //public GameObject Door;
+    public GameObject Lose_Screen;
 
     Game_Controller Game_Controller;
     Audio_Manager Audio_Manager;
-
+    Extra_Objectives Extra_Objectives;
     //Rigidbody rb;
+    //public GameObject Door;
 
     public float Targets_Remaining = 3;
-    [SerializeField] float Timer = 30;
+    //[SerializeField] float Timer = 30;
     //public float door_power = 2;
     //Vector3 new_room_trigger_pos;
 
     [Header("Text")]
     [SerializeField] TMP_Text Targets_Text;
-    [SerializeField] TMP_Text Timer_Text;
+    //[SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Time_Text;
     [SerializeField] TMP_Text Best_time_Text;
     [SerializeField] TMP_Text Best_time_end_Text;
@@ -48,9 +48,11 @@ public class Player : MonoBehaviour
         Time.timeScale = 1;
         Game_Controller = FindAnyObjectByType<Game_Controller>();
         Audio_Manager = FindAnyObjectByType<Audio_Manager>();
+        Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
         Audio_Manager.Play_Music(Audio_Manager.Gameplay);
         Game_Controller.lock_mouse = true;
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
+        Extra_Objectives.Get_current_lvl(SceneManager.GetActiveScene().name);
         //if (Game_Controller.Best_time != 0)
         //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         //else
@@ -62,16 +64,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         Other_Actions();
-        Timer -= Time.deltaTime;
-        Timer_Text.text = Timer.ToString("F2");
-        if (Timer <= 0)
-        {
-            Lose_Screen.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-            Timer_Text.text = "00.00";
-        }
+        //Timer -= Time.deltaTime;
+        //Timer_Text.text = Timer.ToString("F2");
+        //if (Timer <= 0)
+        //{
+        //    Lose_Screen.SetActive(true);
+        //    Cursor.visible = true;
+        //    Cursor.lockState = CursorLockMode.None;
+        //    Time.timeScale = 0;
+        //    Timer_Text.text = "00.00";
+        //}
     }
 
     private void Other_Actions()
@@ -105,6 +107,13 @@ public class Player : MonoBehaviour
             {
                 hit_GO.SetActive(false);
                 Shot_Target();
+            }
+            else if (hit_GO.CompareTag("Pot"))
+            {
+                hit_GO.SetActive(false);
+                if (Extra_Objectives.pots > 0)
+                    Extra_Objectives.pots--;
+
             }
         }
         else
@@ -150,14 +159,14 @@ public class Player : MonoBehaviour
     //        Gameplay_UI.SetActive(false);
     //        Gameplay_Cam.gameObject.SetActive(false);
     //        Win_Cam.gameObject.SetActive(true);
-    //        Final_Time_Text.text = "Final Time: " + Timer.ToString("F2");
+    //        Final_Time_Text.text = "Final Time: " + timer.ToString("F2");
     //        Cursor.visible = true;
     //        Cursor.lockState = CursorLockMode.None;
     //        Audio_Manager.Play_Music(Audio_Manager.Win_OST);
     //        Game_Controller.lock_mouse = false;
-    //        if (Timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
+    //        if (timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
     //        {
-    //            Game_Controller.Best_time = Timer;
+    //            Game_Controller.Best_time = timer;
     //            Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
     //            Game_Controller.Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
     //            PlayerPrefs.SetFloat("Best_Time", Game_Controller.Best_time);
@@ -166,6 +175,16 @@ public class Player : MonoBehaviour
     //            Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
     //    }
     //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectable"))
+        {
+            other.gameObject.SetActive(false);
+            if (Extra_Objectives.collectables > 0)
+                Extra_Objectives.collectables--;
+        }
+    }
 
     public void Shot_Target()
     {
@@ -177,6 +196,13 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+            Game_Controller.can_open_setting = false;
+            if (Extra_Objectives.collectables <= 0)
+                Extra_Objectives.L1_C.color = Color.green;
+            if (Extra_Objectives.pots <= 0)
+                Extra_Objectives.L1_P.color = Color.green;
+            if (FindAnyObjectByType<Timer>().timer >= 15)
+                FindAnyObjectByType<Extra_Objectives>().L1_T.color = Color.green;
         }
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Player_Movement : MonoBehaviour
 {
-    [SerializeField] Slider Dash_cool_bar;
-    [SerializeField] GameObject Dash_cool_bar_fill;
+    //[SerializeField] Slider Dash_cool_bar;
+    //[SerializeField] GameObject Dash_cool_bar_fill;
     [SerializeField] float Speedlines_emission_rate;
-    [SerializeField] ParticleSystem Jump_VFX;
+    //[SerializeField] ParticleSystem Jump_VFX;
     public ParticleSystem Speedlines;
     public Camera Cam;
 
@@ -94,14 +94,14 @@ public class Player_Movement : MonoBehaviour
                 rb.AddForce(Vector3.down, ForceMode.Force);
         }
 
-        if (dash_cool_timer > 0)
-        {
-            dash_cool_timer -= Time.deltaTime;
-            Dash_cool_bar.value = dash_cool_timer;
-            Dash_cool_bar_fill.SetActive(true);
-        }
-        else
-            Dash_cool_bar_fill.SetActive(false);
+        //if (dash_cool_timer > 0)
+        //{
+        //    dash_cool_timer -= Time.deltaTime;
+        //    Dash_cool_bar.value = dash_cool_timer;
+        //    Dash_cool_bar_fill.SetActive(true);
+        //}
+        //else
+        //    Dash_cool_bar_fill.SetActive(false);
 
         //if (Input.GetKeyDown(KeyCode.Tab))
         //{
@@ -158,8 +158,8 @@ public class Player_Movement : MonoBehaviour
         {
             Jump(jump_force);
             ready_to_jump = false;
-            Jump_VFX.transform.position = new(transform.position.x, transform.position.y - 1, transform.position.z);
-            Jump_VFX.Play();
+            //Jump_VFX.transform.position = new(transform.position.x, transform.position.y - 1, transform.position.z);
+            //Jump_VFX.Play();
             //Invoke(nameof(Reset_Jump), jump_cool);
         }
     }

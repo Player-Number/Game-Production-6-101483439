@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ public class Change_Scene : MonoBehaviour
 {
     Game_Controller Game_Controller;
     Audio_Manager Audio_Manager;
+    Extra_Objectives Extra_Objectives;
     //string scene_name;
     //float delay_load_timer = 0.25f;
     //bool to_delay_load = false;
@@ -14,6 +16,7 @@ public class Change_Scene : MonoBehaviour
     {
         Game_Controller = GameObject.Find("Game_Controller").GetComponent<Game_Controller>();
         Audio_Manager = GameObject.Find("Audio_Manager").GetComponent<Audio_Manager>();
+        Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
     }
 
     void Update()
@@ -45,13 +48,47 @@ public class Change_Scene : MonoBehaviour
         }
         else if (name == "Main_Menu")
         {
-            Audio_Manager.Stop_Music();
+            //Audio_Manager.Stop_Music();
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
             //Game_Controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
             Game_Controller.lock_mouse = false;
             Setting_Buttons_Not_In_Game();
+            Game_Controller.can_open_setting = true;
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
+        }
+        else if (name == "Lvl_Select")
+        {
+            Extra_Objectives.all_text.transform.localScale = Vector3.one;
+
+            //for (int i = 0; i < Extra_Objectives.all_text.transform.childCount; i++)
+            //{
+            //    Debug.Log(i);
+            //    Extra_Objectives.all_text.transform.GetChild(i).gameObject.SetActive(true);
+            //}
+            //Extra_Objectives.all_text.SetActive(true);
+            //if (Extra_Objectives.L1_T == true)
+            //    GameObject.Find("L1 15 sec").GetComponent<TMP_Text>().color = Color.gray;
+            //if (Extra_Objectives.L1_C == true)
+            //    GameObject.Find("L1 2 spheres").GetComponent<TMP_Text>().color = Color.gray;
+            //if (Extra_Objectives.L1_P == true)
+            //{
+            //    GameObject.Find("L1 3 pots").GetComponent<TMP_Text>().color = Color.gray;
+            //    Debug.Log("Extra_Objectives.L1_P == true");
+            //}
+
+        }
+        if (name != "Lvl_Select")
+        {
+            //for (int i = 0; i < Extra_Objectives.all_text.transform.childCount; i++)
+            //{
+            //    Debug.Log(i);
+            //    Extra_Objectives.all_text.transform.GetChild(i).gameObject.SetActive(false);
+            //}
+
+            //Extra_Objectives.all_text.SetActive(false);
+            Extra_Objectives.all_text.transform.localScale = Vector3.zero;
+
         }
         //else if (name == "Game_Scene")
         //{
@@ -63,6 +100,7 @@ public class Change_Scene : MonoBehaviour
         //}
         //SceneManager.LoadScene(name);
         Audio_Manager.Play_SFX_Button_Pressed();
+
 
         //else if (name != "Main_Menu")
         //{

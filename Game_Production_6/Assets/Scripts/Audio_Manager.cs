@@ -23,11 +23,6 @@ public class Audio_Manager : MonoBehaviour
         Music_Audio_Source.Play();
     }
 
-    //private void Update()
-    //{
-
-    //}
-
     public void Play_SFX_One_Shot(AudioClip SFX)
     {
         SFX_Audio_Source.PlayOneShot(SFX);
