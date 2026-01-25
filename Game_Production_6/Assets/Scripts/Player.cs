@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -100,7 +101,7 @@ public class Player : MonoBehaviour
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
             //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
             shoot_effect.SetPosition(0, Fire_Point.position);
-            shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
+            shoot_effect.SetPosition(1, hit.point);
             //Destroy(shot_effect_inst, 1);
             GameObject hit_GO = hit.collider.gameObject;
             if (hit_GO.CompareTag("Target"))
@@ -185,7 +186,7 @@ public class Player : MonoBehaviour
                 Extra_Objectives.collectables--;
         }
     }
-
+    string currnt_lvl;
     public void Shot_Target()
     {
         Targets_Remaining--;
@@ -193,16 +194,27 @@ public class Player : MonoBehaviour
         if (Targets_Remaining <= 0)
         {
             Win_Screen.SetActive(true);
+            currnt_lvl = SceneManager.GetActiveScene().name;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             Game_Controller.can_open_setting = false;
-            if (Extra_Objectives.collectables <= 0)
-                Extra_Objectives.L1_C.color = Color.green;
-            if (Extra_Objectives.pots <= 0)
-                Extra_Objectives.L1_P.color = Color.green;
+
             if (FindAnyObjectByType<Timer>().timer >= 15)
-                FindAnyObjectByType<Extra_Objectives>().L1_T.color = Color.green;
+                Extra_Objectives.O1 = Color.green;
+            if (Extra_Objectives.collectables <= 0)
+                Extra_Objectives.O2 = Color.green;
+            if (Extra_Objectives.pots <= 0)
+                Extra_Objectives.O3 = Color.green;
+
+            Extra_Objectives.Check_EO(currnt_lvl);
+            if (currnt_lvl == "Lvl_1")
+                Game_Controller.L2_Locked = false;
+            if (currnt_lvl == "Lvl_2")
+                Game_Controller.L3_Locked = false;
+            if (currnt_lvl == "Lvl_3")
+                Game_Controller.L3_Locked = false;
+
         }
     }
 }

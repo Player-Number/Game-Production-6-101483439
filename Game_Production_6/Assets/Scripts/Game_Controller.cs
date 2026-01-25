@@ -20,7 +20,9 @@ public class Game_Controller : MonoBehaviour
     public bool lock_mouse = false;
     public bool can_open_setting = true;
     bool is_setting_active = false;
-
+    public bool L2_Locked = true;
+    public bool L3_Locked = true;
+    public bool L4_Locked = true;
     //public Slider FOV_Slider;
     //public bool disable_pause = true;
     //[SerializeField] TMP_Text Sensitivity_num;

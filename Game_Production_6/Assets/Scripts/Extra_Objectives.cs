@@ -27,9 +27,13 @@ public class Extra_Objectives : MonoBehaviour
     public TMP_Text L1_T;
     public TMP_Text L1_C;
     public TMP_Text L1_P;
+
+    public Color O1 = Color.white;
+    public Color O2 = Color.white;
+    public Color O3 = Color.white;
     void Start()
     {
-        all_text.transform.localScale = Vector3.zero;
+        
     }
 
     void Update()
@@ -46,5 +50,22 @@ public class Extra_Objectives : MonoBehaviour
             pots = 3;
             FindAnyObjectByType<Timer>().timer = 30;
         }
+    }
+
+    public void Check_EO(string lvl)
+    {
+        current_lvl = lvl;
+        if (current_lvl == "Lvl_1")
+        {
+            if (L1_T.color != Color.green)
+                L1_T.color = O1;
+            if (L1_C.color != Color.green)
+                L1_C.color = O2;
+            if (L1_P.color != Color.green)
+                L1_P.color = O3;
+        }
+        O1 = Color.white;
+        O2 = Color.white;
+        O3 = Color.white;
     }
 }
