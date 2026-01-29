@@ -50,6 +50,12 @@ public class Extra_Objectives : MonoBehaviour
             pots = 3;
             FindAnyObjectByType<Timer>().timer = 30;
         }
+        if (current_lvl == "Lvl_2")
+        {
+            collectables = 2;
+            pots = 3;
+            FindAnyObjectByType<Timer>().timer = 60;
+        }
     }
 
     public void Check_EO(string lvl)

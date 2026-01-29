@@ -11,9 +11,9 @@ public class Special_Target : MonoBehaviour
     [SerializeField] float custom_move_speed_factor;
 
     [SerializeField] List<Transform> path_points = new();
-    List<Vector2> destinations = new();
-    Vector2 start_pos;
-    Vector2 end_pos;
+    List<Vector3> destinations = new();
+    Vector3 start_pos;
+    Vector3 end_pos;
     float timer = 0;
 
     int destination_index = 0;
@@ -45,17 +45,13 @@ public class Special_Target : MonoBehaviour
         if (move_type == Movement_Types.Custom)
         {
             if (timer < 1)
-            {
                 timer += custom_move_speed_factor;
-            }
             else
             {
                 timer = 0;
                 destination_index++;
                 if (destination_index >= destinations.Count)
-                {
                     destination_index = 0;
-                }
                 start_pos = end_pos;
                 end_pos = destinations[destination_index];
             }
@@ -84,7 +80,7 @@ public class Special_Target : MonoBehaviour
                     Mathf.PingPong(ver_speed * Time.time, ver_dis) + start_pos.y, z);
                 break;
             case Movement_Types.Custom:
-                transform.position = Vector2.Lerp(start_pos, end_pos, timer);
+                transform.position = Vector3.Lerp(start_pos, end_pos, timer);
                 break;
         }
 
