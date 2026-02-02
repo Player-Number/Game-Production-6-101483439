@@ -27,7 +27,8 @@ public class Player : MonoBehaviour
     //Rigidbody rb;
     //public GameObject Door;
 
-    public float Targets_Remaining = 3;
+    public float Targets_Remaining = 0;
+    public float Score = 0;
     //[SerializeField] float Timer = 30;
     //public float door_power = 2;
     //Vector3 new_room_trigger_pos;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text Final_Time_Text;
     [SerializeField] TMP_Text Best_time_Text;
     [SerializeField] TMP_Text Best_time_end_Text;
+    [SerializeField] TMP_Text Score_Text;
 
     void Start()
     {
@@ -79,7 +81,7 @@ public class Player : MonoBehaviour
 
     private void Other_Actions()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.timeScale != 0)
         {
             Shooting();
             //GameObject player_bullet = Instantiate(Bullet, Camera.main.transform.position, Camera.main.transform.localRotation);
@@ -106,11 +108,24 @@ public class Player : MonoBehaviour
             GameObject hit_GO = hit.collider.gameObject;
             if (hit_GO.CompareTag("Target"))
             {
-                hit_GO.GetComponent<Target>().Hit();
+                hit_GO.GetComponentInParent<Target>().Hit();
+                if (hit_GO.gameObject.layer == 6)
+                {
+                    Update_Score(2);
+                }
+                if (hit_GO.gameObject.layer == 7)
+                {
+                    Update_Score(3);
+                }
+                if (hit_GO.gameObject.layer == 8)
+                {
+                    Update_Score(4);
+                }
             }
             else if (hit_GO.CompareTag("Pot"))
             {
                 hit_GO.SetActive(false);
+                Update_Score(1);
                 if (Extra_Objectives.pots > 0)
                     Extra_Objectives.pots--;
             }
@@ -180,6 +195,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Collectable"))
         {
             other.gameObject.SetActive(false);
+            Update_Score(1);
             if (Extra_Objectives.collectables > 0)
                 Extra_Objectives.collectables--;
         }
@@ -213,5 +229,11 @@ public class Player : MonoBehaviour
             if (currnt_lvl == "Lvl_3")
                 Game_Controller.L3_Locked = false;
         }
+    }
+
+    void Update_Score(float val)
+    {
+        Score += val;
+        Score_Text.text = "Score: " + Score;
     }
 }

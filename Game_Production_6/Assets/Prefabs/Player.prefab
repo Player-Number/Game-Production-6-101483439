@@ -3192,8 +3192,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -276, y: -249}
-  m_SizeDelta: {x: 422.32, y: 50}
+  m_AnchoredPosition: {x: -270, y: -223.7}
+  m_SizeDelta: {x: 436.8, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8982342721829299326
 CanvasRenderer:
@@ -3514,12 +3514,12 @@ GameObject:
   - component: {fileID: 1307047034689684376}
   - component: {fileID: 953628592451561824}
   m_Layer: 5
-  m_Name: Text_Dash_Cool
+  m_Name: Text_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3822678270377959744
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3567,7 +3567,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dash CD: '
+  m_text: 'Score: ##
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3832,10 +3834,12 @@ MonoBehaviour:
   Fire_Point: {fileID: 7794363495569447724}
   Lose_Screen: {fileID: 5977593760813531584}
   Targets_Remaining: 0
+  Score: 0
   Targets_Text: {fileID: 4262212429924888683}
   Final_Time_Text: {fileID: 2386921244943092964}
   Best_time_Text: {fileID: 5087568950575516106}
   Best_time_end_Text: {fileID: 8091197785657018461}
+  Score_Text: {fileID: 953628592451561824}
 --- !u!114 &7516076553075516603
 MonoBehaviour:
   m_ObjectHideFlags: 0
