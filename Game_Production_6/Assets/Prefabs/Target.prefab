@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 1242027357335728648}
   - component: {fileID: 3602468650530910475}
   - component: {fileID: 1016645823292702097}
+  - component: {fileID: -3999372403283350800}
   m_Layer: 0
   m_Name: Target
   m_TagString: Target
@@ -297,6 +298,25 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-3999372403283350800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7294676812644454197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Target
+  target_type: 0
+  hor_speed: 0
+  ver_speed: 0
+  hor_dis: 0
+  ver_dis: 0
+  custom_move_speed_factor: 0
+  path_points: []
 --- !u!1 &7541319223433057854
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class Player_Bullet : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Destroy(gameObject);
-            FindAnyObjectByType<Player>().Shot_Target();
+            FindAnyObjectByType<Player>().Destoryed_Target();
         }
     }
 

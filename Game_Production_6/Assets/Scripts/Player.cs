@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            Shot_Target();
+            Destoryed_Target();
         }
             //else if (Input.GetKeyDown(KeyCode.R))
             //    Door.GetComponent<Door>().enabled = true;
@@ -106,15 +106,13 @@ public class Player : MonoBehaviour
             GameObject hit_GO = hit.collider.gameObject;
             if (hit_GO.CompareTag("Target"))
             {
-                hit_GO.SetActive(false);
-                Shot_Target();
+                hit_GO.GetComponent<Target>().Hit();
             }
             else if (hit_GO.CompareTag("Pot"))
             {
                 hit_GO.SetActive(false);
                 if (Extra_Objectives.pots > 0)
                     Extra_Objectives.pots--;
-
             }
         }
         else
@@ -187,7 +185,7 @@ public class Player : MonoBehaviour
         }
     }
     string currnt_lvl;
-    public void Shot_Target()
+    public void Destoryed_Target()
     {
         Targets_Remaining--;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
@@ -214,7 +212,6 @@ public class Player : MonoBehaviour
                 Game_Controller.L3_Locked = false;
             if (currnt_lvl == "Lvl_3")
                 Game_Controller.L3_Locked = false;
-
         }
     }
 }

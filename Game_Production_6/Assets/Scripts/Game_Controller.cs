@@ -72,6 +72,10 @@ public class Game_Controller : MonoBehaviour
                 Resume();
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Time.timeScale = 1;
+        }
     }
 
     public void Resume()

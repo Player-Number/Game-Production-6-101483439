@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 420397671117126233}
   - component: {fileID: 1061830639892366844}
   - component: {fileID: 9222981059934856572}
+  - component: {fileID: -5642227653409934465}
   m_Layer: 0
   m_Name: Tank_Target
   m_TagString: Target
@@ -297,6 +298,25 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-5642227653409934465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485737389955827860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Target
+  target_type: 5
+  hor_speed: 0
+  ver_speed: 0
+  hor_dis: 0
+  ver_dis: 0
+  custom_move_speed_factor: 0
+  path_points: []
 --- !u!1 &8847840439144903744
 GameObject:
   m_ObjectHideFlags: 0
