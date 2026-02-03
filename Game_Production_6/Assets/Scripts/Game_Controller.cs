@@ -102,6 +102,32 @@ public class Game_Controller : MonoBehaviour
         //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
     }
 
+    public void Check_Scene(string name)
+    {
+        GetComponent<Extra_Objectives>().all_text.transform.localScale = Vector3.zero;
+        if (name == "Lvl_Select")
+        {
+            GetComponent<Extra_Objectives>().all_text.transform.localScale = Vector3.one;
+
+            //for (int i = 0; i < Extra_Objectives.all_text.transform.childCount; i++)
+            //{
+            //    Debug.Log(i);
+            //    Extra_Objectives.all_text.transform.GetChild(i).gameObject.SetActive(true);
+            //}
+            //Extra_Objectives.all_text.SetActive(true);
+            //if (Extra_Objectives.L1_T == true)
+            //    GameObject.Find("L1 15 sec").GetComponent<TMP_Text>().color = Color.gray;
+            //if (Extra_Objectives.L1_C == true)
+            //    GameObject.Find("L1 2 spheres").GetComponent<TMP_Text>().color = Color.gray;
+            //if (Extra_Objectives.L1_P == true)
+            //{
+            //    GameObject.Find("L1 3 pots").GetComponent<TMP_Text>().color = Color.gray;
+            //    Debug.Log("Extra_Objectives.L1_P == true");
+            //}
+
+        }
+    }
+
     //public void Load_Best_Time()
     //{
     //    if (PlayerPrefs.HasKey("Best_Time"))

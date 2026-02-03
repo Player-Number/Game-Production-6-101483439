@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         Game_Controller.lock_mouse = true;
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         Extra_Objectives.Get_current_lvl(SceneManager.GetActiveScene().name);
+        Extra_Objectives.all_text.transform.localScale = Vector3.zero;
         //if (Game_Controller.Best_time != 0)
         //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         //else
@@ -205,6 +206,8 @@ public class Player : MonoBehaviour
     {
         Targets_Remaining--;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
+        Extra_Objectives.Check_EO();
+
         if (Targets_Remaining <= 0)
         {
             Win_Screen.SetActive(true);
@@ -213,15 +216,7 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             Game_Controller.can_open_setting = false;
-
-            if (FindAnyObjectByType<Timer>().timer >= 15)
-                Extra_Objectives.O1 = Color.green;
-            if (Extra_Objectives.collectables <= 0)
-                Extra_Objectives.O2 = Color.green;
-            if (Extra_Objectives.pots <= 0)
-                Extra_Objectives.O3 = Color.green;
-
-            Extra_Objectives.Check_EO(currnt_lvl);
+            Extra_Objectives.Set_Completed_EO(currnt_lvl);
             if (currnt_lvl == "Lvl_1")
                 Game_Controller.L2_Locked = false;
             if (currnt_lvl == "Lvl_2")

@@ -23,7 +23,7 @@ public class Player_Movement : MonoBehaviour
     float horizontal_input;
     float vertical_input;
 
-    bool no_cool = false;
+    //bool no_cool = false;
 
     [Header("Speed")]
     public float move_speed;

@@ -28,6 +28,8 @@ public class Extra_Objectives : MonoBehaviour
     public TMP_Text L1_C;
     public TMP_Text L1_P;
 
+    public TMP_Text L2_P;
+
     public Color O1 = Color.white;
     public Color O2 = Color.white;
     public Color O3 = Color.white;
@@ -52,13 +54,13 @@ public class Extra_Objectives : MonoBehaviour
         }
         if (current_lvl == "Lvl_2")
         {
-            collectables = 2;
-            pots = 3;
+            collectables = 1;
+            pots = 2;
             FindAnyObjectByType<Timer>().timer = 60;
         }
     }
 
-    public void Check_EO(string lvl)
+    public void Set_Completed_EO(string lvl)
     {
         current_lvl = lvl;
         if (current_lvl == "Lvl_1")
@@ -70,8 +72,39 @@ public class Extra_Objectives : MonoBehaviour
             if (L1_P.color != Color.green)
                 L1_P.color = O3;
         }
+        else if (current_lvl == "Lvl_2")
+        {
+            //if (L1_T.color != Color.green)
+            //    L1_T.color = O1;
+            //if (L1_C.color != Color.green)
+            //    L1_C.color = O2;
+            if (L2_P.color != Color.green)
+                L2_P.color = O3;
+        }
+
         O1 = Color.white;
         O2 = Color.white;
         O3 = Color.white;
+    }
+
+    public void L1_EO()
+    {
+        if (FindAnyObjectByType<Timer>().timer >= 15)
+            O1 = Color.green;
+        if (collectables <= 0)
+            O2 = Color.green;
+        if (pots <= 0)
+            O3 = Color.green;
+    }
+    public void L2_EO()
+    {
+        if (pots <= 0)
+            O3 = Color.green;
+    }
+
+    public void Check_EO()
+    {
+        L1_EO();
+        L2_EO();
     }
 }
