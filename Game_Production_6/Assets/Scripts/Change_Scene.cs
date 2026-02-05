@@ -60,6 +60,10 @@ public class Change_Scene : MonoBehaviour
             Game_Controller.can_open_setting = true;
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
         }
+        else
+        {
+            Setting_Buttons_In_Game();
+        }
         //else if (name == "Lvl_Select")
         //{
         //    Extra_Objectives.all_text.transform.localScale = Vector3.one;

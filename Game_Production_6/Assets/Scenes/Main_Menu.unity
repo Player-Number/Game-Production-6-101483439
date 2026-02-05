@@ -485,7 +485,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &52777905
 RectTransform:
@@ -992,7 +992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 67.00001}
+  m_AnchoredPosition: {x: -140, y: 67.00001}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &140665662
@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 435156321}
   - component: {fileID: 435156320}
   m_Layer: 5
-  m_Name: l2 40 score
+  m_Name: l2 score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- get at least 40 score
+  m_text: '- get at least 60 score
 
 '
   m_isRightToLeft: 0
@@ -7583,7 +7583,7 @@ GameObject:
   - component: {fileID: 1850013644}
   - component: {fileID: 1850013643}
   m_Layer: 5
-  m_Name: l2 Destroy 2 targets
+  m_Name: l2 targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8628,8 +8628,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1985562842}
-  - {fileID: 52777905}
   - {fileID: 1837148028}
+  - {fileID: 52777905}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2070214124
@@ -8665,9 +8665,12 @@ MonoBehaviour:
   current_lvl: 
   collectables: 0
   pots: 0
+  two_tar: 0
   L1_T: {fileID: 1233099956}
   L1_C: {fileID: 1609985483}
   L1_P: {fileID: 177568603}
+  L2_T: {fileID: 1850013643}
+  L2_S: {fileID: 435156320}
   L2_P: {fileID: 1480628723}
   O1: {r: 1, g: 1, b: 1, a: 1}
   O2: {r: 1, g: 1, b: 1, a: 1}

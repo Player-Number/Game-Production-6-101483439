@@ -57,6 +57,19 @@ public class Player : MonoBehaviour
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         Extra_Objectives.Get_current_lvl(SceneManager.GetActiveScene().name);
         Extra_Objectives.all_text.transform.localScale = Vector3.zero;
+        current_lvl = SceneManager.GetActiveScene().name;
+        if (current_lvl == "Lvl_1")
+        {
+            FindAnyObjectByType<Timer>().timer = 30;
+        }
+        else if (current_lvl == "Lvl_2")
+        {
+            FindAnyObjectByType<Timer>().timer = 60;
+        }
+        else if (current_lvl == "Lvl_3")
+        {
+            FindAnyObjectByType<Timer>().timer = 60;
+        }
         //if (Game_Controller.Best_time != 0)
         //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         //else
@@ -94,11 +107,13 @@ public class Player : MonoBehaviour
             //else if (Input.GetKeyDown(KeyCode.R))
             //    Door.GetComponent<Door>().enabled = true;
     }
-
+    float PU_pierce = 0;
+    float target_hitted = 0;
     void Shooting()
     {
         RaycastHit hit;
         Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
+
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100))
         {
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
@@ -107,21 +122,26 @@ public class Player : MonoBehaviour
             shoot_effect.SetPosition(1, hit.point);
             //Destroy(shot_effect_inst, 1);
             GameObject hit_GO = hit.collider.gameObject;
-            if (hit_GO.CompareTag("Target"))
+            if (hit_GO.CompareTag("Target") || hit_GO.CompareTag("Target_Tank"))
             {
-                hit_GO.GetComponentInParent<Target>().Hit();
-                if (hit_GO.gameObject.layer == 6)
+                Hit_target(hit_GO);
+                target_hitted++;
+                if (target_hitted >= 2)
                 {
-                    Update_Score(2);
+                    Extra_Objectives.two_tar = true;
                 }
-                if (hit_GO.gameObject.layer == 7)
-                {
-                    Update_Score(3);
-                }
-                if (hit_GO.gameObject.layer == 8)
-                {
-                    Update_Score(4);
-                }
+                //if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100) && PU_pierce > 0)
+                //{
+                //    shoot_effect.SetPosition(0, Fire_Point.position);
+                //    shoot_effect.SetPosition(1, hit.point);
+                //    hit_GO = hit.collider.gameObject;
+                //    if (hit_GO.CompareTag("Target"))
+                //    {
+                //        Hit_target(hit_GO);
+                //        Update_Score(2);
+                //        Extra_Objectives.two_tar = true;
+                //    }
+                //}
             }
             else if (hit_GO.CompareTag("Pot"))
             {
@@ -130,15 +150,32 @@ public class Player : MonoBehaviour
                 if (Extra_Objectives.pots > 0)
                     Extra_Objectives.pots--;
             }
+            //else if (hit_GO.CompareTag("Pierce"))
+            //{
+            //    PU_pierce = 4;
+            //    hit_GO.SetActive(false);
+            //}
+            //PU_pierce--;
+            //bool a = true;
+            //if (hit_GO.CompareTag("Target_Tank"))
+            //{
+            //    a = false;
+            //}
+            if (hit_GO.layer != 3 && hit_GO.tag != "Target_Tank")
+            {
+                Shooting();
+            }
+            else
+                target_hitted = 0;
         }
-        else
-        {
-            Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * 100, Color.red, 1);
-            //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
-            shoot_effect.SetPosition(0, Fire_Point.position);
-            shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
-            //Destroy(shot_effect_inst, 1);
-        }
+        //else
+        //{
+        //    Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * 100, Color.red, 1);
+        //    //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
+        //    shoot_effect.SetPosition(0, Fire_Point.position);
+        //    shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
+        //    //Destroy(shot_effect_inst, 1);
+        //}
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -201,7 +238,7 @@ public class Player : MonoBehaviour
                 Extra_Objectives.collectables--;
         }
     }
-    string currnt_lvl;
+    string current_lvl;
     public void Destoryed_Target()
     {
         Targets_Remaining--;
@@ -211,19 +248,30 @@ public class Player : MonoBehaviour
         if (Targets_Remaining <= 0)
         {
             Win_Screen.SetActive(true);
-            currnt_lvl = SceneManager.GetActiveScene().name;
+            current_lvl = SceneManager.GetActiveScene().name;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             Game_Controller.can_open_setting = false;
-            Extra_Objectives.Set_Completed_EO(currnt_lvl);
-            if (currnt_lvl == "Lvl_1")
+            Extra_Objectives.Set_Completed_EO(current_lvl);
+            if (current_lvl == "Lvl_1")
                 Game_Controller.L2_Locked = false;
-            if (currnt_lvl == "Lvl_2")
+            if (current_lvl == "Lvl_2")
                 Game_Controller.L3_Locked = false;
-            if (currnt_lvl == "Lvl_3")
-                Game_Controller.L3_Locked = false;
+            if (current_lvl == "Lvl_3")
+                Game_Controller.L4_Locked = false;
         }
+    }
+
+    void Hit_target(GameObject Hit_GO)
+    {
+        Hit_GO.GetComponentInParent<Target>().Hit();
+        if (Hit_GO.gameObject.layer == 6)
+            Update_Score(2);
+        if (Hit_GO.gameObject.layer == 7)
+            Update_Score(3);
+        if (Hit_GO.gameObject.layer == 8)
+            Update_Score(4);
     }
 
     void Update_Score(float val)

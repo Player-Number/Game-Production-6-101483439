@@ -23,11 +23,14 @@ public class Extra_Objectives : MonoBehaviour
     public string current_lvl;
     public float collectables = 0;
     public float pots = 0;
+    public bool two_tar = false;
 
     public TMP_Text L1_T;
     public TMP_Text L1_C;
     public TMP_Text L1_P;
 
+    public TMP_Text L2_T;
+    public TMP_Text L2_S;
     public TMP_Text L2_P;
 
     public Color O1 = Color.white;
@@ -50,13 +53,16 @@ public class Extra_Objectives : MonoBehaviour
         {
             collectables = 2;
             pots = 3;
-            FindAnyObjectByType<Timer>().timer = 30;
         }
-        if (current_lvl == "Lvl_2")
+        else if (current_lvl == "Lvl_2")
         {
             collectables = 1;
             pots = 2;
-            FindAnyObjectByType<Timer>().timer = 60;
+        }
+        else if (current_lvl == "Lvl_3")
+        {
+            collectables = 1;
+            pots = 1;
         }
     }
 
@@ -74,10 +80,10 @@ public class Extra_Objectives : MonoBehaviour
         }
         else if (current_lvl == "Lvl_2")
         {
-            //if (L1_T.color != Color.green)
-            //    L1_T.color = O1;
-            //if (L1_C.color != Color.green)
-            //    L1_C.color = O2;
+            if (L2_T.color != Color.green)
+                L2_T.color = O1;
+            if (L2_S.color != Color.green)
+                L2_S.color = O2;
             if (L2_P.color != Color.green)
                 L2_P.color = O3;
         }
@@ -89,7 +95,7 @@ public class Extra_Objectives : MonoBehaviour
 
     public void L1_EO()
     {
-        if (FindAnyObjectByType<Timer>().timer >= 15)
+        if (two_tar)
             O1 = Color.green;
         if (collectables <= 0)
             O2 = Color.green;
@@ -98,6 +104,10 @@ public class Extra_Objectives : MonoBehaviour
     }
     public void L2_EO()
     {
+        if (FindAnyObjectByType<Timer>().timer >= 15)
+            O1 = Color.green;
+        if (FindAnyObjectByType<Player>().Score >= 60)
+            O2 = Color.green;
         if (pots <= 0)
             O3 = Color.green;
     }

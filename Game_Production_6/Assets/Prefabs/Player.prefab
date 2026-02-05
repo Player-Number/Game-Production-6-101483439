@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 4100772124973803190}
   - component: {fileID: 6372881954726824986}
   - component: {fileID: 873601805844871573}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3567,7 +3567,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: ##
+  m_text: 'Score: 0
 
 '
   m_isRightToLeft: 0
@@ -10723,7 +10723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   Timer_Text: {fileID: 3661654921273134840}
   Player: {fileID: 2097763636743514162}
-  timer: 0
+  timer: 60
 --- !u!1 &8472356382414733698
 GameObject:
   m_ObjectHideFlags: 0

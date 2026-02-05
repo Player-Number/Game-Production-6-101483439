@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 16821899}
   - component: {fileID: 16821898}
   - component: {fileID: 16821897}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 69849763}
   - component: {fileID: 69849762}
   - component: {fileID: 69849761}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pillar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,7 +928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416196278}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lvl geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,7 +974,7 @@ GameObject:
   - component: {fileID: 439143018}
   - component: {fileID: 439143017}
   - component: {fileID: 439143016}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1085,7 +1085,7 @@ GameObject:
   - component: {fileID: 667684834}
   - component: {fileID: 667684833}
   - component: {fileID: 667684832}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ceiling (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 694091664}
   - component: {fileID: 694091663}
   - component: {fileID: 694091662}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1307,7 @@ GameObject:
   - component: {fileID: 698346335}
   - component: {fileID: 698346334}
   - component: {fileID: 698346333}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1480,7 @@ GameObject:
   - component: {fileID: 819389215}
   - component: {fileID: 819389214}
   - component: {fileID: 819389213}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2146,7 +2146,7 @@ GameObject:
   - component: {fileID: 1293212259}
   - component: {fileID: 1293212258}
   - component: {fileID: 1293212257}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2262,7 +2262,7 @@ GameObject:
   - component: {fileID: 1428412677}
   - component: {fileID: 1428412676}
   - component: {fileID: 1428412675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2378,7 +2378,7 @@ GameObject:
   - component: {fileID: 1491100866}
   - component: {fileID: 1491100865}
   - component: {fileID: 1491100864}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2793,7 +2793,7 @@ GameObject:
   - component: {fileID: 2012519562}
   - component: {fileID: 2012519561}
   - component: {fileID: 2012519560}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2909,7 +2909,7 @@ GameObject:
   - component: {fileID: 2076235208}
   - component: {fileID: 2076235207}
   - component: {fileID: 2076235206}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3466,9 +3466,9 @@ SceneRoots:
   - {fileID: 1628226974}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 1865048834}
   - {fileID: 1753169359791467408}
   - {fileID: 1229575217}
+  - {fileID: 1865048834}
   - {fileID: 416196278}
   - {fileID: 100415610}
   - {fileID: 181867759}

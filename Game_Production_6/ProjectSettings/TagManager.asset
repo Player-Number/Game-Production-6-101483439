@@ -8,6 +8,8 @@ TagManager:
   - Volume
   - Collectable
   - Pot
+  - Pierce
+  - Target_Tank
   layers:
   - Default
   - TransparentFX
