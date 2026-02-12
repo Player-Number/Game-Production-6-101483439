@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Extra_Objectives : MonoBehaviour
 {
@@ -25,26 +23,26 @@ public class Extra_Objectives : MonoBehaviour
     public float pots = 0;
     public bool two_tar = false;
 
-    public TMP_Text L1_T;
-    public TMP_Text L1_C;
-    public TMP_Text L1_P;
+    public bool B_L1_T;
+    public bool B_L1_C;
+    public bool B_L1_P;
+                 
+    public bool B_L2_T;
+    public bool B_L2_S;
+    public bool B_L2_P;
 
-    public TMP_Text L2_T;
-    public TMP_Text L2_S;
-    public TMP_Text L2_P;
-
-    public Color O1 = Color.white;
-    public Color O2 = Color.white;
-    public Color O3 = Color.white;
-    void Start()
-    {
+    //public Color O1 = Color.white;
+    //public Color O2 = Color.white;
+    //public Color O3 = Color.white;
+    //void Start()
+    //{
         
-    }
+    //}
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     public void Get_current_lvl(string lvl)
     {
@@ -66,55 +64,68 @@ public class Extra_Objectives : MonoBehaviour
         }
     }
 
-    public void Set_Completed_EO(string lvl)
-    {
-        current_lvl = lvl;
-        if (current_lvl == "Lvl_1")
-        {
-            if (L1_T.color != Color.green)
-                L1_T.color = O1;
-            if (L1_C.color != Color.green)
-                L1_C.color = O2;
-            if (L1_P.color != Color.green)
-                L1_P.color = O3;
-        }
-        else if (current_lvl == "Lvl_2")
-        {
-            if (L2_T.color != Color.green)
-                L2_T.color = O1;
-            if (L2_S.color != Color.green)
-                L2_S.color = O2;
-            if (L2_P.color != Color.green)
-                L2_P.color = O3;
-        }
-
-        O1 = Color.white;
-        O2 = Color.white;
-        O3 = Color.white;
-    }
+    //public void Set_Completed_EO(string lvl)
+    //{
+    //    current_lvl = lvl;
+    //    if (current_lvl == "Lvl_1")
+    //    {
+    //        if (B_L1_T != true)
+    //            B_L1_T.color = O1;
+    //        if (B_L1_C.color != Color.green)
+    //            B_L1_C.color = O2;
+    //        if (B_L1_P.color != Color.green)
+    //            B_L1_P.color = O3;
+    //    }
+    //    else if (current_lvl == "Lvl_2")
+    //    {
+    //        if (B_L2_T.color != Color.green)
+    //            B_L2_T.color = O1;
+    //        if (B_L2_S.color != Color.green)
+    //            B_L2_S.color = O2;
+    //        if (B_L2_P.color != Color.green)
+    //            B_L2_P.color = O3;
+    //    }
+    //    //O1 = Color.white;
+    //    //O2 = Color.white;
+    //    //O3 = Color.white;
+    //}
 
     public void L1_EO()
     {
-        if (two_tar)
-            O1 = Color.green;
+        if (FindAnyObjectByType<Timer>().timer >= 15)
+            B_L1_T = true;
         if (collectables <= 0)
-            O2 = Color.green;
+            B_L1_C = true;
         if (pots <= 0)
-            O3 = Color.green;
+            B_L1_P = true;
     }
     public void L2_EO()
     {
-        if (FindAnyObjectByType<Timer>().timer >= 15)
-            O1 = Color.green;
-        if (FindAnyObjectByType<Player>().Score >= 60)
-            O2 = Color.green;
+        if (two_tar)
+            B_L2_T = true;
+        if (FindAnyObjectByType<Player>().Score >= 45)
+            B_L2_S = true;
         if (pots <= 0)
-            O3 = Color.green;
+            B_L2_P = true;
+    }
+    public void L3_EO()
+    {
+        
     }
 
     public void Check_EO()
     {
-        L1_EO();
-        L2_EO();
+        if (current_lvl == "Lvl_1")
+        {
+            L1_EO();
+        }
+        else if (current_lvl == "Lvl_2")
+        {
+            L2_EO();
+        }
+        else if (current_lvl == "Lvl_3")
+        {
+            L3_EO();
+        }
     }
 }

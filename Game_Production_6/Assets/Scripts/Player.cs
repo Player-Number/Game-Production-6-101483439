@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,40 +5,42 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] Camera Gameplay_Cam;
-    //[SerializeField] Camera Win_Cam;
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Win_Screen;
     [SerializeField] GameObject Gameplay_UI;
     [SerializeField] Player_Movement Player_Movement;
-    //[SerializeField] ParticleSystem Collected_Particle;
-    //[SerializeField] ParticleSystem To_Power_Door;
     [SerializeField] ParticleSystem Player_Death;
     [SerializeField] LineRenderer shoot_effect;
+    //[SerializeField] Camera Win_Cam;
+    //[SerializeField] ParticleSystem Collected_Particle;
+    //[SerializeField] ParticleSystem To_Power_Door;
     //[SerializeField] InputActionAsset input_actions;
     
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Fire_Point;
-    public GameObject Lose_Screen;
 
     Game_Controller Game_Controller;
     Audio_Manager Audio_Manager;
     Extra_Objectives Extra_Objectives;
+    Timer Timer;
     //Rigidbody rb;
     //public GameObject Door;
 
+    public GameObject Lose_Screen;
     public float Targets_Remaining = 0;
     public float Score = 0;
+    Vector3 reset_pos;
     //[SerializeField] float Timer = 30;
     //public float door_power = 2;
     //Vector3 new_room_trigger_pos;
 
     [Header("Text")]
     [SerializeField] TMP_Text Targets_Text;
-    //[SerializeField] TMP_Text Timer_Text;
     [SerializeField] TMP_Text Final_Time_Text;
     [SerializeField] TMP_Text Best_time_Text;
     [SerializeField] TMP_Text Best_time_end_Text;
     [SerializeField] TMP_Text Score_Text;
+    //[SerializeField] TMP_Text Timer_Text;
 
     void Start()
     {
@@ -58,17 +59,19 @@ public class Player : MonoBehaviour
         Extra_Objectives.Get_current_lvl(SceneManager.GetActiveScene().name);
         Extra_Objectives.all_text.transform.localScale = Vector3.zero;
         current_lvl = SceneManager.GetActiveScene().name;
+        reset_pos = transform.position;
+        Timer = FindAnyObjectByType<Timer>();
         if (current_lvl == "Lvl_1")
         {
-            FindAnyObjectByType<Timer>().timer = 30;
+            Timer.timer = 30;
         }
         else if (current_lvl == "Lvl_2")
         {
-            FindAnyObjectByType<Timer>().timer = 60;
+            Timer.timer = 45;
         }
         else if (current_lvl == "Lvl_3")
         {
-            FindAnyObjectByType<Timer>().timer = 60;
+            Timer.timer = 15;
         }
         //if (Game_Controller.Best_time != 0)
         //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
@@ -107,7 +110,6 @@ public class Player : MonoBehaviour
             //else if (Input.GetKeyDown(KeyCode.R))
             //    Door.GetComponent<Door>().enabled = true;
     }
-    float PU_pierce = 0;
     float target_hitted = 0;
     void Shooting()
     {
@@ -126,10 +128,10 @@ public class Player : MonoBehaviour
             {
                 Hit_target(hit_GO);
                 target_hitted++;
-                if (target_hitted >= 2)
-                {
-                    Extra_Objectives.two_tar = true;
-                }
+                //if (target_hitted >= 2)
+                //{
+                //    Extra_Objectives.two_tar = true;
+                //}
                 //if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100) && PU_pierce > 0)
                 //{
                 //    shoot_effect.SetPosition(0, Fire_Point.position);
@@ -161,12 +163,12 @@ public class Player : MonoBehaviour
             //{
             //    a = false;
             //}
-            if (hit_GO.layer != 3 && hit_GO.tag != "Target_Tank")
-            {
-                Shooting();
-            }
-            else
-                target_hitted = 0;
+            //if (hit_GO.layer != 3 && hit_GO.tag != "Target_Tank")
+            //{
+            //    Shooting();
+            //}
+            //else
+            //    target_hitted = 0;
         }
         //else
         //{
@@ -237,6 +239,11 @@ public class Player : MonoBehaviour
             if (Extra_Objectives.collectables > 0)
                 Extra_Objectives.collectables--;
         }
+        else if (other.gameObject.name == "Reset_Y")
+        {
+            transform.position = reset_pos;
+        }
+
     }
     string current_lvl;
     public void Destoryed_Target()
@@ -253,7 +260,7 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             Game_Controller.can_open_setting = false;
-            Extra_Objectives.Set_Completed_EO(current_lvl);
+            //Extra_Objectives.Set_Completed_EO(current_lvl);
             if (current_lvl == "Lvl_1")
                 Game_Controller.L2_Locked = false;
             if (current_lvl == "Lvl_2")
@@ -266,12 +273,12 @@ public class Player : MonoBehaviour
     void Hit_target(GameObject Hit_GO)
     {
         Hit_GO.GetComponentInParent<Target>().Hit();
-        if (Hit_GO.gameObject.layer == 6)
+        if (Hit_GO.layer == 6)
+            Update_Score(1);
+        if (Hit_GO.layer == 7)
             Update_Score(2);
-        if (Hit_GO.gameObject.layer == 7)
+        if (Hit_GO.layer == 8)
             Update_Score(3);
-        if (Hit_GO.gameObject.layer == 8)
-            Update_Score(4);
     }
 
     void Update_Score(float val)

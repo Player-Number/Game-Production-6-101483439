@@ -4,6 +4,8 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [SerializeField] Target_Types target_type; // 2.5
+
+    [Header("Moving")]
     [SerializeField] float hor_speed; // 2.5
     [SerializeField] float ver_speed; // 2.5
     [SerializeField] float hor_dis; // 5
