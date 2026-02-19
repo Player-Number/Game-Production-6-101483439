@@ -127,7 +127,11 @@ public class Player : MonoBehaviour
             if (hit_GO.CompareTag("Target") || hit_GO.CompareTag("Target_Tank"))
             {
                 Hit_target(hit_GO);
-                target_hitted++;
+                if (hit_GO.CompareTag("Target"))
+                {
+                    Shooting();
+                }
+                //target_hitted++;
                 //if (target_hitted >= 2)
                 //{
                 //    Extra_Objectives.two_tar = true;

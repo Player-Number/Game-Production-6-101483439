@@ -17,6 +17,10 @@ public class Lvl_Select : MonoBehaviour
     public TMP_Text L2_S;
     public TMP_Text L2_P;
 
+    public TMP_Text L3_T;
+    public TMP_Text L3_S;
+    public TMP_Text L3_P;
+
     void Start()
     {
         GC = FindAnyObjectByType<Game_Controller>();

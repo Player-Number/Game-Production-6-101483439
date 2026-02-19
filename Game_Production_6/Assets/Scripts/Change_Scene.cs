@@ -64,6 +64,7 @@ public class Change_Scene : MonoBehaviour
         {
             Setting_Buttons_In_Game();
         }
+        Audio_Manager.Play_SFX_Button_Pressed();
         //else if (name == "Lvl_Select")
         //{
         //    Extra_Objectives.all_text.transform.localScale = Vector3.one;
@@ -106,7 +107,6 @@ public class Change_Scene : MonoBehaviour
         //    Setting_Buttons_In_Game();
         //}
         //SceneManager.LoadScene(name);
-        Audio_Manager.Play_SFX_Button_Pressed();
 
 
         //else if (name != "Main_Menu")
