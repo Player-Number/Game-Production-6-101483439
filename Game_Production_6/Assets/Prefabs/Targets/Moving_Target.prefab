@@ -233,7 +233,8 @@ GameObject:
   - component: {fileID: 2398390614166807691}
   - component: {fileID: 6778840184697257859}
   - component: {fileID: 717863955202973631}
-  - component: {fileID: 6763869553653238220}
+  - component: {fileID: -1966699812438825230}
+  - component: {fileID: -6574117590329419025}
   m_Layer: 0
   m_Name: Moving_Target
   m_TagString: Target
@@ -298,7 +299,26 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &6763869553653238220
+--- !u!114 &-1966699812438825230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6583557558476078463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27898c0f7f82f084b8f665dc448f9c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moving_Target
+  target_type: 0
+  hor_speed: 2
+  ver_speed: 2
+  hor_dis: 5
+  ver_dis: 5
+  custom_move_speed_factor: 0.01
+  path_points: []
+--- !u!114 &-6574117590329419025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,14 +329,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Special_Target
+  m_EditorClassIdentifier: Assembly-CSharp::Target
   target_type: 1
-  hor_speed: 2
-  ver_speed: 2
-  hor_dis: 5
-  ver_dis: 5
-  custom_move_speed_factor: 2
-  path_points: []
+  Fuse: 0
+  Flash_Bang_Timer: 0
+  Ex_vfx: {fileID: 0}
 --- !u!1 &8827263930888404210
 GameObject:
   m_ObjectHideFlags: 0

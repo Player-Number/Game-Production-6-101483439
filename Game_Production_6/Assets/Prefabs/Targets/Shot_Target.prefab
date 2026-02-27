@@ -199,13 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Target
-  target_type: 0
-  hor_speed: 0
-  ver_speed: 0
-  hor_dis: 0
-  ver_dis: 0
-  custom_move_speed_factor: 0
-  path_points: []
+  target_type: 4
+  Ex_vfx: {fileID: 0}
+  FB_vfx: {fileID: 0}
+  FB_Effect: {fileID: 0}
+  Fuse: 0
 --- !u!1 &5692749764002125952
 GameObject:
   m_ObjectHideFlags: 0

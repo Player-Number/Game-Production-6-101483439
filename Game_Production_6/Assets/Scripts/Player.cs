@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     //public GameObject Door;
 
     public GameObject Lose_Screen;
+    public GameObject flash_bang;
     public float Targets_Remaining = 0;
     public float Score = 0;
     Vector3 reset_pos;
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
 
-        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100))
+        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 1000))
         {
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
             //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
@@ -127,10 +128,10 @@ public class Player : MonoBehaviour
             if (hit_GO.CompareTag("Target") || hit_GO.CompareTag("Target_Tank"))
             {
                 Hit_target(hit_GO);
-                if (hit_GO.CompareTag("Target"))
-                {
-                    Shooting();
-                }
+                //if (hit_GO.CompareTag("Target"))
+                //{
+                //    Shooting();
+                //}
                 //target_hitted++;
                 //if (target_hitted >= 2)
                 //{
