@@ -4354,7 +4354,11 @@ MonoBehaviour:
   Ex_vfx: {fileID: 0}
   FB_vfx: {fileID: 0}
   FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  Fuse_mat: {fileID: 0}
   Fuse: 0
+  max_Fuse_ticking_timer: 0
 --- !u!114 &983165349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5992,7 +5996,11 @@ MonoBehaviour:
   Ex_vfx: {fileID: 0}
   FB_vfx: {fileID: 0}
   FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  Fuse_mat: {fileID: 0}
   Fuse: 0
+  max_Fuse_ticking_timer: 0
 --- !u!114 &1539825676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7785,10 +7793,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 693544154}
     m_Modifications:
-    - target: {fileID: 3223215694476709708, guid: 220cf2d06520407419fb7e0fdc43fa42, type: 3}
-      propertyPath: timer
-      value: 
-      objectReference: {fileID: 1434883143}
     - target: {fileID: 8357011122695551596, guid: 220cf2d06520407419fb7e0fdc43fa42, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.71

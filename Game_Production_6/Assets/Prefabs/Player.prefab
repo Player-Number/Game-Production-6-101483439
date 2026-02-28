@@ -1072,7 +1072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4096138941430676483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10710,9 +10710,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   Timer_Text: {fileID: 3661654921273134840}
   Player: {fileID: 2097763636743514162}
-  timer: 60
-  FB_in_effect_timer: 0
   max_FB_in_effect_timer: 2
+  FB_in_effect_timer: 0
+  timer: 60
+  fade_duration: 1
 --- !u!1 &8472356382414733698
 GameObject:
   m_ObjectHideFlags: 0

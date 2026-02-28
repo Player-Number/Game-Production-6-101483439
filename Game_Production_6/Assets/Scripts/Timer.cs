@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -8,9 +10,11 @@ public class Timer : MonoBehaviour
     [SerializeField] float max_FB_in_effect_timer; // 2
     public float FB_in_effect_timer = 0;
     public float timer = 5;
+    Image FB_effect;
+    bool in_FB = false;
     void Start()
     {
-        
+        FB_effect = FindAnyObjectByType<Player>().flash_bang.GetComponent<Image>();
     }
 
     void Update()
@@ -26,15 +30,29 @@ public class Timer : MonoBehaviour
             Timer_Text.text = "00.00";
         }
 
-        if (FB_in_effect_timer > 0)
+        if (FB_in_effect_timer > 1)
         {
-            FindAnyObjectByType<Player>().flash_bang.SetActive(true);
+            //FB_effect.gameObject.SetActive(true);
+            FB_effect.color = new Color(FB_effect.color.r, FB_effect.color.g, FB_effect.color.b, 1);
             FB_in_effect_timer -= Time.deltaTime;
+            in_FB = true;
         }
-        else
+        else if (in_FB && FB_in_effect_timer < 1)
         {
-            FindAnyObjectByType<Player>().flash_bang.SetActive(false);
+            StartCoroutine(Fade_Out());
+            //FindAnyObjectByType<Player>().flash_bang.GetComponent<Image>().color.a -= Time.deltaTime;
         }
         //Debug.Log(FB_in_effect_timer);
+    }
+    [SerializeField] float fade_duration;
+    private IEnumerator Fade_Out()
+    {
+        in_FB = false;
+        for (float i = fade_duration; i >= 0; i -= Time.deltaTime)
+        {
+            FB_effect.color = new Color(FB_effect.color.r, FB_effect.color.g, FB_effect.color.b, Mathf.Clamp01(i / fade_duration));
+            yield return null;
+        }
+        FB_effect.color = new Color(FB_effect.color.r, FB_effect.color.g, FB_effect.color.b, 0f);
     }
 }

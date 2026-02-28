@@ -9,9 +9,16 @@ public class Target : MonoBehaviour
     [SerializeField] ParticleSystem Ex_vfx; 
     [SerializeField] ParticleSystem FB_vfx; 
     [SerializeField] GameObject FB_Effect; 
+    [SerializeField] GameObject Outer; 
+    [SerializeField] GameObject center; 
+    [SerializeField] Material Fuse_mat; 
     [SerializeField] float Fuse; // 2
+    [SerializeField] float max_Fuse_ticking_timer; // 0.5
 
     Player player;
+    Material og_Fuse_mat; 
+
+    float Fuse_ticking_timer;
     enum Target_Types
     {
         Still,
@@ -29,12 +36,17 @@ public class Target : MonoBehaviour
             Ex_vfx = GameObject.Find("Ex_Vfx").GetComponent<ParticleSystem>();
             //Ex_vfx.Stop();
         }
+        else if (target_type == Target_Types.FB)
+        {
+            og_Fuse_mat = center.GetComponent<MeshRenderer>().material;
+            Fuse_ticking_timer = max_Fuse_ticking_timer;
+        }
     }
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
     float HP = 3;
     public void Hit()
     {
@@ -53,6 +65,7 @@ public class Target : MonoBehaviour
         else if (target_type == Target_Types.FB)
         {
             StartCoroutine(FB());
+            StartCoroutine(Fuse_flashing());
         }
         else
         {
@@ -69,6 +82,26 @@ public class Target : MonoBehaviour
         FB_Effect.SetActive(true);
         FB_vfx.gameObject.SetActive(true);
         gameObject.SetActive(false);
+    }
+
+    IEnumerator Fuse_flashing()
+    {
+        Material fuse_mat_ticking = Fuse_mat;
+        for (int i = 0; i < 10; i++)
+        {
+            Outer.GetComponent<MeshRenderer>().material = fuse_mat_ticking;
+            center.GetComponent<MeshRenderer>().material = fuse_mat_ticking;
+            if (fuse_mat_ticking == Fuse_mat)
+            {
+                fuse_mat_ticking = og_Fuse_mat;
+            }
+            else if (fuse_mat_ticking == og_Fuse_mat)
+            {
+                fuse_mat_ticking = Fuse_mat;
+            }
+            yield return new WaitForSeconds(max_Fuse_ticking_timer);
+        }
+        //yield return null;
     }
 
     //IEnumerator Explode()
