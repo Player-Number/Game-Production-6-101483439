@@ -19,7 +19,7 @@ public class Target : MonoBehaviour
     Material og_Fuse_mat; 
 
     float Fuse_ticking_timer;
-    enum Target_Types
+    public enum Target_Types
     {
         Still,
         Moving,
@@ -31,12 +31,12 @@ public class Target : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<Player>();
-        if (target_type == Target_Types.Ex)
-        {
-            Ex_vfx = GameObject.Find("Ex_Vfx").GetComponent<ParticleSystem>();
-            //Ex_vfx.Stop();
-        }
-        else if (target_type == Target_Types.FB)
+        //if (target_type == Target_Types.Ex)
+        //{
+        //    Ex_vfx = GameObject.Find("Ex_Vfx").GetComponent<ParticleSystem>();
+        //    //Ex_vfx.Stop();
+        //}
+        if (target_type == Target_Types.FB)
         {
             og_Fuse_mat = center.GetComponent<MeshRenderer>().material;
             Fuse_ticking_timer = max_Fuse_ticking_timer;
@@ -58,10 +58,10 @@ public class Target : MonoBehaviour
                 Target_Shot();
             }
         }
-        else if (target_type == Target_Types.Ex)
-        {
-            //StartCoroutine(Explode());
-        }
+        //else if (target_type == Target_Types.Ex)
+        //{
+        //    //StartCoroutine(Explode());
+        //}
         else if (target_type == Target_Types.FB)
         {
             StartCoroutine(FB());
@@ -76,11 +76,13 @@ public class Target : MonoBehaviour
     IEnumerator FB()
     {
         player.Destoryed_Target();
-        FB_Effect.transform.SetParent(null);
-        FB_vfx.gameObject.transform.SetParent(null);
+        //FB_Effect.transform.SetParent(null);
+        //FB_vfx.gameObject.transform.SetParent(null);
         yield return new WaitForSeconds(Fuse);
-        FB_Effect.SetActive(true);
-        FB_vfx.gameObject.SetActive(true);
+        Instantiate(FB_Effect, transform.position, Quaternion.identity);
+        Instantiate(FB_vfx, transform.position, Quaternion.identity);
+        //FB_Effect.SetActive(true);
+        //FB_vfx.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
 

@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     public GameObject Lose_Screen;
     public GameObject flash_bang;
-    public float Targets_Remaining = 0;
+     float Targets_Remaining = 0;
     public float Score = 0;
     Vector3 reset_pos;
     //[SerializeField] float Timer = 30;
@@ -45,15 +45,15 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //rb = GetComponent<Rigidbody>();
         //new_room_trigger_pos = transform.position;
+        Game_Controller = FindAnyObjectByType<Game_Controller>();
+        Audio_Manager = FindAnyObjectByType<Audio_Manager>();
+        Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
+
         GameObject targets = GameObject.Find("Targets");
         Targets_Remaining = targets.transform.childCount;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
-        Game_Controller = FindAnyObjectByType<Game_Controller>();
-        Audio_Manager = FindAnyObjectByType<Audio_Manager>();
-        Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
         Audio_Manager.Play_Music(Audio_Manager.Gameplay);
         Game_Controller.lock_mouse = true;
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
@@ -74,6 +74,11 @@ public class Player : MonoBehaviour
         {
             Timer.timer = 15;
         }
+        else if (current_lvl == "Lvl_4")
+        {
+            Timer.timer = 30;
+        }
+
         //if (Game_Controller.Best_time != 0)
         //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
         //else
@@ -111,11 +116,10 @@ public class Player : MonoBehaviour
             //else if (Input.GetKeyDown(KeyCode.R))
             //    Door.GetComponent<Door>().enabled = true;
     }
-    float target_hitted = 0;
+    //float target_hitted = 0;
     void Shooting()
     {
         RaycastHit hit;
-        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
 
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 1000))
         {
@@ -183,6 +187,8 @@ public class Player : MonoBehaviour
         //    shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
         //    //Destroy(shot_effect_inst, 1);
         //}
+        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
+
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -290,5 +296,10 @@ public class Player : MonoBehaviour
     {
         Score += val;
         Score_Text.text = "Score: " + Score;
+    }
+
+    public void In_How_Play_Lvl()
+    {
+        Targets_Remaining = int.MaxValue;
     }
 }

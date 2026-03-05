@@ -9670,7 +9670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7177991128484655636
 Transform:
   m_ObjectHideFlags: 0
@@ -14470,7 +14470,7 @@ MonoBehaviour:
   - light: {fileID: 1864245857890077472}
     loop: 0
     animateIntensity: 1
-    intensityStart: 21.112127
+    intensityStart: 100
     intensityEnd: 0
     intensityDuration: 1
     intensityCurve:
@@ -14513,8 +14513,8 @@ MonoBehaviour:
     fadeOut: 0
     fadeOutDuration: 0.5
     animateRange: 1
-    rangeStart: 4
-    rangeEnd: 10
+    rangeStart: 100
+    rangeEnd: 100
     rangeDuration: 0.15
     rangeCurve:
       serializedVersion: 2

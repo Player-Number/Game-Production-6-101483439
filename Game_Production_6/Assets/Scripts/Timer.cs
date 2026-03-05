@@ -40,9 +40,7 @@ public class Timer : MonoBehaviour
         else if (in_FB && FB_in_effect_timer < 1)
         {
             StartCoroutine(Fade_Out());
-            //FindAnyObjectByType<Player>().flash_bang.GetComponent<Image>().color.a -= Time.deltaTime;
         }
-        //Debug.Log(FB_in_effect_timer);
     }
     [SerializeField] float fade_duration;
     private IEnumerator Fade_Out()
@@ -54,5 +52,10 @@ public class Timer : MonoBehaviour
             yield return null;
         }
         FB_effect.color = new Color(FB_effect.color.r, FB_effect.color.g, FB_effect.color.b, 0f);
+    }
+
+    public void How_Play_Lvl_Timer()
+    {
+        timer = 999;
     }
 }

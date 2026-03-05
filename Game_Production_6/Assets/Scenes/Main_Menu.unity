@@ -8628,8 +8628,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1985562842}
-  - {fileID: 1837148028}
   - {fileID: 52777905}
+  - {fileID: 1837148028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2070214124
@@ -8666,15 +8666,12 @@ MonoBehaviour:
   collectables: 0
   pots: 0
   two_tar: 0
-  L1_T: {fileID: 1233099956}
-  L1_C: {fileID: 1609985483}
-  L1_P: {fileID: 177568603}
-  L2_T: {fileID: 1850013643}
-  L2_S: {fileID: 435156320}
-  L2_P: {fileID: 1480628723}
-  O1: {r: 1, g: 1, b: 1, a: 1}
-  O2: {r: 1, g: 1, b: 1, a: 1}
-  O3: {r: 1, g: 1, b: 1, a: 1}
+  B_L1_T: 0
+  B_L1_C: 0
+  B_L1_P: 0
+  B_L2_T: 0
+  B_L2_S: 0
+  B_L2_P: 0
 --- !u!1 &2071011798
 GameObject:
   m_ObjectHideFlags: 0

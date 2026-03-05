@@ -14,10 +14,15 @@ public class Flash_Bang : MonoBehaviour
     {
         if (GetComponent<MeshRenderer>().isVisible)
         {
-            FindAnyObjectByType<Timer>().FB_in_effect_timer = 2;
-            gameObject.SetActive(false);
+            if (FindAnyObjectByType<Timer>() != null)
+            {
+                FindAnyObjectByType<Timer>().FB_in_effect_timer = 2;
+            }
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
         }
         else
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 }

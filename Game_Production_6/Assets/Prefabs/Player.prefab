@@ -2134,6 +2134,61 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2737038778593677816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6208086559234307332}
+  - component: {fileID: 8992171076878811439}
+  m_Layer: 5
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6208086559234307332
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737038778593677816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4444627572923166486}
+  m_Father: {fileID: 4892810749723418055}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -9.400024, y: 220}
+  m_SizeDelta: {x: 88.79993, y: -40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8992171076878811439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737038778593677816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09c453a0dd5e8347adf28427f1bee0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  Timer_Text: {fileID: 3661654921273134840}
+  Player: {fileID: 2097763636743514162}
+  max_FB_in_effect_timer: 2
+  FB_in_effect_timer: 0
+  timer: 60
+  fade_duration: 1
 --- !u!1 &2864074046777888288
 GameObject:
   m_ObjectHideFlags: 0
@@ -3820,7 +3875,6 @@ MonoBehaviour:
   Fire_Point: {fileID: 7794363495569447724}
   Lose_Screen: {fileID: 5977593760813531584}
   flash_bang: {fileID: 1492835528642298917}
-  Targets_Remaining: 0
   Score: 0
   Targets_Text: {fileID: 4262212429924888683}
   Final_Time_Text: {fileID: 2386921244943092964}
@@ -3844,7 +3898,7 @@ MonoBehaviour:
   Cam: {fileID: 5088735796301380805}
   Orientation: {fileID: 1000739029278420397}
   state: 0
-  move_speed: 4
+  move_speed: 6
   air_speed: 0.4
   jump_force: 7
   jump_cool: 0.1
@@ -10304,7 +10358,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3640128270716039890}
-  - {fileID: 4444627572923166486}
+  - {fileID: 6208086559234307332}
   - {fileID: 1501236220022195727}
   - {fileID: 1801300954380405088}
   m_Father: {fileID: 6951683234659567748}
@@ -10630,7 +10684,6 @@ GameObject:
   - component: {fileID: 4444627572923166486}
   - component: {fileID: 8343471218888119852}
   - component: {fileID: 9010711969056735011}
-  - component: {fileID: 3764965188480275385}
   m_Layer: 5
   m_Name: Panel_Timer
   m_TagString: Untagged
@@ -10651,12 +10704,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1329184250589636132}
-  m_Father: {fileID: 4892810749723418055}
+  m_Father: {fileID: 6208086559234307332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.400024, y: 220}
-  m_SizeDelta: {x: 88.79993, y: -40}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8343471218888119852
 CanvasRenderer:
@@ -10696,24 +10749,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3764965188480275385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8350614617182911097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09c453a0dd5e8347adf28427f1bee0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Timer
-  Timer_Text: {fileID: 3661654921273134840}
-  Player: {fileID: 2097763636743514162}
-  max_FB_in_effect_timer: 2
-  FB_in_effect_timer: 0
-  timer: 60
-  fade_duration: 1
 --- !u!1 &8472356382414733698
 GameObject:
   m_ObjectHideFlags: 0
