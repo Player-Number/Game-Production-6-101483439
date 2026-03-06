@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,13 +8,13 @@ public class Player_Movement : MonoBehaviour
 {
     //[SerializeField] Slider Dash_cool_bar;
     //[SerializeField] GameObject Dash_cool_bar_fill;
-    [SerializeField] float Speedlines_emission_rate;
-    //[SerializeField] ParticleSystem Jump_VFX;
-    public ParticleSystem Speedlines;
+    //[SerializeField] float Speedlines_emission_rate;
+    //public ParticleSystem Speedlines;
+    [SerializeField] ParticleSystem Jump_VFX;
     public Camera Cam;
 
     Rigidbody rb;
-    Settings Settings;
+    //Settings Settings;
     //GameObject Game_Controller;
 
     public Transform Orientation;
@@ -26,24 +27,25 @@ public class Player_Movement : MonoBehaviour
     //bool no_cool = false;
 
     [Header("Speed")]
-    public float move_speed;
-    float og_move_speed;
+    [SerializeField] float move_speed;
+    public float og_move_speed;
     public float air_speed;
+    public float Max_Y_speed;
+    [SerializeField] float slow_timer; // 2
 
     [Header("Jumping")]
     public float jump_force;
     public float jump_cool;
     bool ready_to_jump = true;
 
-    [Header("Dashing")]
-    public float dash_force;
-    public float dash_speed;
-    public float dash_cool;
-    float dash_cool_timer = 2;
-    bool is_dashing = false;
-    public float dash_duration = 0.2f;
-    public float Max_Y_speed;
-    public float dash_force_up;
+    //[Header("Dashing")]
+    //public float dash_force;
+    //public float dash_speed;
+    //public float dash_cool;
+    ////float dash_cool_timer = 2;
+    ////bool is_dashing = false;
+    //public float dash_duration = 0.2f;
+    //public float dash_force_up;
 
     [Header("Ground Check")]
     public float player_height;
@@ -69,9 +71,9 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        og_move_speed = move_speed;
         //Settings = FindAnyObjectByType<Settings>();
         //Settings.FOV_On_Val_Changed();
-        og_move_speed = move_speed;
         //Dash_cool_bar.maxValue = dash_cool;
         //Game_Controller = GameObject.Find("Game_Controller");
     }
@@ -80,8 +82,8 @@ public class Player_Movement : MonoBehaviour
     {
         Player_Input();
         FOV_based_on_Speed();
-        State_Handler();
         Move_Cap();
+        //State_Handler();
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //    Dash();
 
@@ -93,6 +95,7 @@ public class Player_Movement : MonoBehaviour
             if (rb.linearVelocity.y < 0)
                 rb.AddForce(Vector3.down, ForceMode.Force);
         }
+        Debug.Log(move_speed);
 
         //if (dash_cool_timer > 0)
         //{
@@ -129,25 +132,25 @@ public class Player_Movement : MonoBehaviour
         is_grounded = Physics.Raycast(transform.position, Vector3.down, player_height * 0.5f + 0.15f, ground_layer);
     }
 
-    void State_Handler()
-    {
-        if (is_grounded)
-        {
-            state = Movement_State.Running;
-            move_speed = og_move_speed;
-        }
-        else if (is_dashing)
-        {
-            state = Movement_State.Dashing;
-            move_speed = dash_speed;
-        }
-        else
-            move_speed = og_move_speed;
-        //else
-        //{
-        //    state = Movement_State.Airborne;
-        //}
-    }
+    //void State_Handler()
+    //{
+    //    if (is_grounded)
+    //    {
+    //        state = Movement_State.Running;
+    //        move_speed = og_move_speed;
+    //    }
+    //    //else if (is_dashing)
+    //    //{
+    //    //    state = Movement_State.Dashing;
+    //    //    move_speed = dash_speed;
+    //    //}
+    //    else
+    //        move_speed = og_move_speed;
+    //    //else
+    //    //{
+    //    //    state = Movement_State.Airborne;
+    //    //}
+    //}
 
     void Player_Input()
     {
@@ -187,28 +190,28 @@ public class Player_Movement : MonoBehaviour
         ready_to_jump = true;
     }
 
-    void Dash()
-    {
-        if (dash_cool_timer > 0) return;
-        else dash_cool_timer = dash_cool;
-        Vector3 force_to_apply = Cam.gameObject.transform.forward * dash_force + Orientation.up * dash_force_up;
-        rb.AddForce(force_to_apply, ForceMode.Impulse);
-        Invoke(nameof(Reset_Dash), dash_duration);
-        is_dashing = true;
-        rb.useGravity = false;
-        //Vector3 dir = Get_Dir(Cam.gameObject.transform);
-        //delay_force_to_apply = force_to_apply;
-        //Invoke(nameof(force_to_apply), 0.02f);
+    //void Dash()
+    //{
+    //    if (dash_cool_timer > 0) return;
+    //    else dash_cool_timer = dash_cool;
+    //    Vector3 force_to_apply = Cam.gameObject.transform.forward * dash_force + Orientation.up * dash_force_up;
+    //    rb.AddForce(force_to_apply, ForceMode.Impulse);
+    //    Invoke(nameof(Reset_Dash), dash_duration);
+    //    is_dashing = true;
+    //    rb.useGravity = false;
+    //    //Vector3 dir = Get_Dir(Cam.gameObject.transform);
+    //    //delay_force_to_apply = force_to_apply;
+    //    //Invoke(nameof(force_to_apply), 0.02f);
 
-    }
+    //}
 
-    void Reset_Dash()
-    {
-        rb.linearVelocity = Vector3.zero;
-        is_dashing = false;
-        rb.useGravity = true;
-        //Speedlines.SetActive(false);
-    }
+    //void Reset_Dash()
+    //{
+    //    rb.linearVelocity = Vector3.zero;
+    //    is_dashing = false;
+    //    rb.useGravity = true;
+    //    //Speedlines.SetActive(false);
+    //}
     //private Vector3 delay_force_to_apply;
     //void Delay_Dash_Force()
     //{
@@ -252,6 +255,14 @@ public class Player_Movement : MonoBehaviour
         if (Max_Y_speed != 0 && rb.linearVelocity.y > Max_Y_speed)
             rb.linearVelocity = new(rb.linearVelocity.x, Max_Y_speed, rb.linearVelocity.z);
     }
+
+    public IEnumerator Slow_Player()
+    {
+        move_speed /= 2;
+        yield return new WaitForSeconds(slow_timer);
+        move_speed = og_move_speed;
+    }
+
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.layer == 3)

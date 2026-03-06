@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Other_Actions();
+
         //Timer -= Time.deltaTime;
         //Timer_Text.text = Timer.ToString("F2");
         //if (Timer <= 0)

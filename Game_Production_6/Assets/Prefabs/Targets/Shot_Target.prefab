@@ -203,7 +203,12 @@ MonoBehaviour:
   Ex_vfx: {fileID: 0}
   FB_vfx: {fileID: 0}
   FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  projectile: {fileID: 6294508013172393196, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
+  Fuse_mat: {fileID: 0}
   Fuse: 0
+  max_Fuse_ticking_timer: 0
 --- !u!1 &5692749764002125952
 GameObject:
   m_ObjectHideFlags: 0

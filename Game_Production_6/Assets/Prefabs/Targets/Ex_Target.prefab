@@ -313,9 +313,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Target
   target_type: 2
-  Fuse: 2
-  Flash_Bang_Timer: 2
   Ex_vfx: {fileID: 3108639976978260155}
+  FB_vfx: {fileID: 0}
+  FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  projectile: {fileID: 0}
+  Fuse_mat: {fileID: 0}
+  Fuse: 2
+  max_Fuse_ticking_timer: 0
 --- !u!23 &399830045278826791
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -501,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
       propertyPath: m_LocalScale.x

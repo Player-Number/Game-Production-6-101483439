@@ -3893,21 +3893,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68797780351c0b47b61943ceeb2502b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_Movement
-  Speedlines_emission_rate: 3
-  Speedlines: {fileID: 0}
   Cam: {fileID: 5088735796301380805}
   Orientation: {fileID: 1000739029278420397}
   state: 0
   move_speed: 6
+  og_move_speed: 0
   air_speed: 0.4
+  Max_Y_speed: 25
+  slow_timer: 2
   jump_force: 7
   jump_cool: 0.1
-  dash_force: 13
-  dash_speed: 15
-  dash_cool: 2
-  dash_duration: 0.25
-  Max_Y_speed: 25
-  dash_force_up: 0
   player_height: 2
   grounded_drag: 5
   ground_layer:

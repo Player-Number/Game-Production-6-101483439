@@ -11,6 +11,7 @@ public class Target : MonoBehaviour
     [SerializeField] GameObject FB_Effect; 
     [SerializeField] GameObject Outer; 
     [SerializeField] GameObject center; 
+    [SerializeField] GameObject projectile; 
     [SerializeField] Material Fuse_mat; 
     [SerializeField] float Fuse; // 2
     [SerializeField] float max_Fuse_ticking_timer; // 0.5
@@ -66,6 +67,11 @@ public class Target : MonoBehaviour
         {
             StartCoroutine(FB());
             StartCoroutine(Fuse_flashing());
+        }
+        else if (target_type == Target_Types.Shoot)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            Target_Shot();
         }
         else
         {
