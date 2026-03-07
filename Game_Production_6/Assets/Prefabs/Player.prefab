@@ -893,7 +893,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8316ac71fe2249246a131ed976ef82de, type: 2}
+  - {fileID: 2100000, guid: d1806e7fc3283b34596bad8f41d58d1c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3871,6 +3871,7 @@ MonoBehaviour:
   Player_Movement: {fileID: 7516076553075516603}
   Player_Death: {fileID: 0}
   shoot_effect: {fileID: 1104254201563347305}
+  fade_duration: 1
   Bullet: {fileID: 3584243112532669215, guid: c952772b96a8b2747af72a2aa49d3009, type: 3}
   Fire_Point: {fileID: 7794363495569447724}
   Lose_Screen: {fileID: 5977593760813531584}
@@ -3893,6 +3894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68797780351c0b47b61943ceeb2502b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_Movement
+  Jump_VFX: {fileID: 0}
   Cam: {fileID: 5088735796301380805}
   Orientation: {fileID: 1000739029278420397}
   state: 0

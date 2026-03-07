@@ -7,6 +7,9 @@ public class How_to_Play_Target : MonoBehaviour
     //Vector3 respawn_pos;
     void Start()
     {
+        FindAnyObjectByType<Timer>().How_Play_Lvl_Timer();
+        FindAnyObjectByType<Player>().In_How_Play_Lvl();
+
         //respawn_pos = Tar.transform.position;
     }
 
@@ -20,8 +23,6 @@ public class How_to_Play_Target : MonoBehaviour
                 Tar.SetActive(true);
                 timer = 1;
                 //Tar.transform.position = respawn_pos;
-                FindAnyObjectByType<Player>().In_How_Play_Lvl();
-                FindAnyObjectByType<Timer>().How_Play_Lvl_Timer();
             }
             //Debug.Log(!Tar.activeInHierarchy);
         }

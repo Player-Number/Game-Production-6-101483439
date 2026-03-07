@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,11 +12,13 @@ public class Player : MonoBehaviour
     [SerializeField] Player_Movement Player_Movement;
     [SerializeField] ParticleSystem Player_Death;
     [SerializeField] LineRenderer shoot_effect;
+    [SerializeField] private float fade_duration;
+
     //[SerializeField] Camera Win_Cam;
     //[SerializeField] ParticleSystem Collected_Particle;
     //[SerializeField] ParticleSystem To_Power_Door;
     //[SerializeField] InputActionAsset input_actions;
-    
+
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Fire_Point;
 
@@ -23,7 +26,6 @@ public class Player : MonoBehaviour
     Audio_Manager Audio_Manager;
     Extra_Objectives Extra_Objectives;
     Timer Timer;
-    //Rigidbody rb;
     //public GameObject Door;
 
     public GameObject Lose_Screen;
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
      float Targets_Remaining = 0;
     public float Score = 0;
     Vector3 reset_pos;
+
     //[SerializeField] float Timer = 30;
     //public float door_power = 2;
     //Vector3 new_room_trigger_pos;
@@ -117,13 +120,24 @@ public class Player : MonoBehaviour
             //else if (Input.GetKeyDown(KeyCode.R))
             //    Door.GetComponent<Door>().enabled = true;
     }
-    //float target_hitted = 0;
+
+    private IEnumerator Fade_Out()
+    {
+        Material SE_mat = shoot_effect.material;
+        for (float i = fade_duration; i >= 0; i -= Time.deltaTime)
+        {
+            SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, Mathf.Clamp01(i / fade_duration));
+            yield return null;
+        }
+        SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, 0f);
+    }
+
     void Shooting()
     {
-        RaycastHit hit;
 
-        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 1000))
+        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
         {
+            StartCoroutine(Fade_Out());
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
             //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
             shoot_effect.SetPosition(0, Fire_Point.position);
@@ -258,6 +272,7 @@ public class Player : MonoBehaviour
 
     }
     string current_lvl;
+
     public void Destoryed_Target()
     {
         Targets_Remaining--;

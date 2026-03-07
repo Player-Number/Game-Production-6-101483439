@@ -56,6 +56,6 @@ public class Timer : MonoBehaviour
 
     public void How_Play_Lvl_Timer()
     {
-        timer = 999;
+        timer = int.MaxValue;
     }
 }
