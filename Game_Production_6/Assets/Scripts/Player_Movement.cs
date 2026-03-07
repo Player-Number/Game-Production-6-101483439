@@ -95,7 +95,6 @@ public class Player_Movement : MonoBehaviour
             if (rb.linearVelocity.y < 0)
                 rb.AddForce(Vector3.down, ForceMode.Force);
         }
-        Debug.Log(move_speed);
 
         //if (dash_cool_timer > 0)
         //{

@@ -1960,12 +1960,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Target
   target_type: 0
-  hor_speed: 0
-  ver_speed: 0
-  hor_dis: 0
-  ver_dis: 0
-  custom_move_speed_factor: 0
-  path_points: []
+  Ex_vfx: {fileID: 0}
+  FB_vfx: {fileID: 0}
+  FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  projectile: {fileID: 0}
+  Fuse_mat: {fileID: 0}
+  Fuse: 0
+  max_Fuse_ticking_timer: 0
 --- !u!114 &999860034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2245,7 +2248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963555136799145435, guid: 8211d150495a84d4f9364c0898cca691, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.43
+      value: 0.57
       objectReference: {fileID: 0}
     - target: {fileID: 963555136799145435, guid: 8211d150495a84d4f9364c0898cca691, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3878,7 +3881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963555136799145435, guid: 8211d150495a84d4f9364c0898cca691, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.438
+      value: 1.53
       objectReference: {fileID: 0}
     - target: {fileID: 963555136799145435, guid: 8211d150495a84d4f9364c0898cca691, type: 3}
       propertyPath: m_LocalPosition.z
