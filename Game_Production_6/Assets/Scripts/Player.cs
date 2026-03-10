@@ -270,6 +270,10 @@ public class Player : MonoBehaviour
         {
             transform.position = reset_pos;
         }
+        else if (other.CompareTag("Main Menu"))
+        {
+            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Main_Menu");
+        }
 
     }
     string current_lvl;

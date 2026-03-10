@@ -42,7 +42,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3389863309061342303, guid: 284c2eae627374b48869e471711b77fe, type: 3}
       propertyPath: m_Name
-      value: pot1
+      value: pot_model
       objectReference: {fileID: 0}
     - target: {fileID: 3389863309061342303, guid: 284c2eae627374b48869e471711b77fe, type: 3}
       propertyPath: m_TagString
