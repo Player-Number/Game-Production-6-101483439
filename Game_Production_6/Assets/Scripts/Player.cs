@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
     void Shooting()
     {
 
-        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
+        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 100))
         {
             StartCoroutine(Fade_Out());
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
@@ -194,6 +194,8 @@ public class Player : MonoBehaviour
             //else
             //    target_hitted = 0;
         }
+        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
+
         //else
         //{
         //    Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * 100, Color.red, 1);
@@ -202,7 +204,6 @@ public class Player : MonoBehaviour
         //    shoot_effect.SetPosition(1, Camera.main.transform.forward * 100);
         //    //Destroy(shot_effect_inst, 1);
         //}
-        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
 
     }
 
