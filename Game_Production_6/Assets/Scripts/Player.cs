@@ -22,22 +22,23 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Bullet;
     [SerializeField] Transform Fire_Point;
 
-    Game_Controller Game_Controller;
-    Audio_Manager Audio_Manager;
-    Extra_Objectives Extra_Objectives;
-    Timer Timer;
+    Game_Controller game_controller;
+    Audio_Manager audio_manager;
+    Extra_Objectives Extra_Objective;
+    Timer Timer_cs;
     //public GameObject Door;
 
     public GameObject Lose_Screen;
     public GameObject flash_bang;
      float Targets_Remaining = 0;
     public float Score = 0;
-    public float target_hitted = 0;
     Vector3 respawn_pos;
 
-    //[SerializeField] float Timer = 30;
+    //[SerializeField] float Timer_cs = 30;
+    //public float target_hitted = 0;
     //public float door_power = 2;
     //Vector3 new_room_trigger_pos;
+    string current_lvl;
 
     [Header("Text")]
     [SerializeField] TMP_Text Targets_Text;
@@ -49,55 +50,65 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //new_room_trigger_pos = transform.position;
-        Game_Controller = FindAnyObjectByType<Game_Controller>();
-        Audio_Manager = FindAnyObjectByType<Audio_Manager>();
-        Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
-        current_lvl = SceneManager.GetActiveScene().name;
+        game_controller = FindAnyObjectByType<Game_Controller>();
+        audio_manager = FindAnyObjectByType<Audio_Manager>();
+        Extra_Objective = FindAnyObjectByType<Extra_Objectives>();
+        Timer_cs = FindAnyObjectByType<Timer>();
 
-        //GameObject targets = GameObject.Find("Targets");
         Targets_Remaining = GameObject.Find("Targets").transform.childCount;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
-        Audio_Manager.Play_Music(Audio_Manager.Gameplay);
-        Game_Controller.lock_mouse = true;
+        audio_manager.Play_Music(audio_manager.Gameplay);
+        game_controller.lock_mouse = true;
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
-        Extra_Objectives.Get_current_lvl(SceneManager.GetActiveScene().name);
-        Extra_Objectives.all_text.transform.localScale = Vector3.zero;
+        Extra_Objective.all_text.transform.localScale = Vector3.zero;
         respawn_pos = transform.position;
-        Timer = FindAnyObjectByType<Timer>();
-        if (current_lvl == "Lvl_1")
-        {
-            Timer.timer = 30;
-        }
-        else if (current_lvl == "Lvl_2")
-        {
-            Timer.timer = 45;
-        }
-        else if (current_lvl == "Lvl_3")
-        {
-            Timer.timer = 15;
-        }
-        else if (current_lvl == "Lvl_4")
-        {
-            Timer.timer = 30;
-        }
+        Extra_Objective.current_lvl = SceneManager.GetActiveScene().name;
 
-        //if (Game_Controller.Best_time != 0)
-        //    Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
+        //if (Extra_Objective.tar_air == false)
+        //{
+
+        //}
+
+        Extra_Objective.collectables = 0;
+        Extra_Objective.pots = 0;
+
+
+        //current_lvl = SceneManager.GetActiveScene().name;
+        //if (current_lvl == "Lvl_1")
+        //{
+        //    Timer_cs.timer = 30;
+        //}
+        //else if (current_lvl == "Lvl_2")
+        //{
+        //    Timer_cs.timer = 45;
+        //}
+        //else if (current_lvl == "Lvl_3")
+        //{
+        //    Timer_cs.timer = 15;
+        //}
+        //else if (current_lvl == "Lvl_4")
+        //{
+        //    Timer_cs.timer = 30;
+        //}
+
+        //if (game_controller.Best_time != 0)
+        //    Best_time_Text.text = "Best Time: " + game_controller.Best_time.ToString("F2");
         //else
         //    Best_time_Text.text = "Best Time: None";
 
         //move_input = input_actions.FindAction("Move");
+        //new_room_trigger_pos = transform.position; 
+
     }
 
     void Update()
     {
         Other_Actions();
 
-        //Timer -= Time.deltaTime;
-        //Timer_Text.text = Timer.ToString("F2");
-        //if (Timer <= 0)
+        //Timer_cs -= Time.deltaTime;
+        //Timer_Text.text = Timer_cs.ToString("F2");
+        //if (Timer_cs <= 0)
         //{
         //    Lose_Screen.SetActive(true);
         //    Cursor.visible = true;
@@ -114,7 +125,7 @@ public class Player : MonoBehaviour
             Shooting();
             //GameObject player_bullet = Instantiate(Bullet, Camera.main.transform.position, Camera.main.transform.localRotation);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        else if (Input.GetKeyDown(KeyCode.Alpha0)) ////////////////////////////////////////////////////////////////////////////////////
         {
             Destoryed_Target();
         }
@@ -140,9 +151,9 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Shoot_Effect_Fade_Out());
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
-            //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
             shoot_effect.SetPosition(0, Fire_Point.position);
             shoot_effect.SetPosition(1, hit.point);
+            //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
             //Destroy(shot_effect_inst, 1);
             GameObject hit_GO = hit.collider.gameObject;
             if (hit_GO.CompareTag("Target") || hit_GO.CompareTag("Target_Tank"))
@@ -155,7 +166,7 @@ public class Player : MonoBehaviour
                 //target_hitted++;
                 //if (target_hitted >= 2)
                 //{
-                //    Extra_Objectives.two_tar = true;
+                //    Extra_Objective.two_tar = true;
                 //}
                 //if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100) && PU_pierce > 0)
                 //{
@@ -166,7 +177,7 @@ public class Player : MonoBehaviour
                 //    {
                 //        Hit_target(hit_GO);
                 //        Update_Score(2);
-                //        Extra_Objectives.two_tar = true;
+                //        Extra_Objective.two_tar = true;
                 //    }
                 //}
             }
@@ -174,10 +185,8 @@ public class Player : MonoBehaviour
             {
                 hit_GO.SetActive(false);
                 Update_Score(1);
-                if (Extra_Objectives.pots > 0)
-                    Extra_Objectives.pots--;
-                else
-                    Extra_Objectives.Check_EO();
+                Extra_Objective.pots++;
+                Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
             }
             //else if (hit_GO.CompareTag("Pierce"))
             //{
@@ -197,7 +206,7 @@ public class Player : MonoBehaviour
             //else
             //    target_hitted = 0;
         }
-        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
+        audio_manager.Play_SFX_One_Shot(audio_manager.Shooting);
 
         //else
         //{
@@ -216,7 +225,7 @@ public class Player : MonoBehaviour
     //    {
     //        Collect();
     //        other.gameObject.SetActive(false);
-    //        Audio_Manager.Play_SFX_One_Shot(Audio_Manager.Shooting);
+    //        audio_manager.Play_SFX_One_Shot(audio_manager.Shooting);
     //        ParticleSystem Collected_Particle_inst = Instantiate(Collected_Particle, other.transform.position, Quaternion.identity);
     //        if (!Collected_Particle_inst.isEmitting)
     //        {
@@ -246,17 +255,17 @@ public class Player : MonoBehaviour
     //        Final_Time_Text.text = "Final Time: " + timer.ToString("F2");
     //        Cursor.visible = true;
     //        Cursor.lockState = CursorLockMode.None;
-    //        Audio_Manager.Play_Music(Audio_Manager.Win_OST);
-    //        Game_Controller.lock_mouse = false;
-    //        if (timer < Game_Controller.Best_time || Game_Controller.Best_time == 0)
+    //        audio_manager.Play_Music(audio_manager.Win_OST);
+    //        game_controller.lock_mouse = false;
+    //        if (timer < game_controller.Best_time || game_controller.Best_time == 0)
     //        {
-    //            Game_Controller.Best_time = timer;
-    //            Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
-    //            Game_Controller.Best_time_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
-    //            PlayerPrefs.SetFloat("Best_Time", Game_Controller.Best_time);
+    //            game_controller.Best_time = timer;
+    //            Best_time_end_Text.text = "Best Time: " + game_controller.Best_time.ToString("F2");
+    //            game_controller.Best_time_Text.text = "Best Time: " + game_controller.Best_time.ToString("F2");
+    //            PlayerPrefs.SetFloat("Best_Time", game_controller.Best_time);
     //        }
     //        else
-    //            Best_time_end_Text.text = "Best Time: " + Game_Controller.Best_time.ToString("F2");
+    //            Best_time_end_Text.text = "Best Time: " + game_controller.Best_time.ToString("F2");
     //    }
     //}
 
@@ -266,10 +275,8 @@ public class Player : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Update_Score(1);
-            if (Extra_Objectives.collectables > 0)
-                Extra_Objectives.collectables--;
-            else
-                Extra_Objectives.Check_EO();
+            Extra_Objective.collectables++;
+            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
 
         }
         else if (other.gameObject.name == "Respawn_Y")
@@ -282,30 +289,52 @@ public class Player : MonoBehaviour
         }
 
     }
-    string current_lvl;
 
     public void Destoryed_Target()
     {
         Targets_Remaining--;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
-        target_hitted = 1;
-        Extra_Objectives.Check_EO();
-
-        if (Targets_Remaining <= 0)
+        Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Target);
+        //if (GetComponent<Player_Movement>().is_grounded == false && current_lvl == "Lvl_3")
+        //{
+        //    Extra_Objective.tar_air = true;
+        //}
+        if (Targets_Remaining <= 0) // win
         {
             Win_Screen.SetActive(true);
-            current_lvl = SceneManager.GetActiveScene().name;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
-            Game_Controller.can_open_setting = false;
-            //Extra_Objectives.Set_Completed_EO(current_lvl);
+            game_controller.can_open_setting = false;
+            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Timer);
+
+            //current_lvl = SceneManager.GetActiveScene().name;
+            //Extra_Objective.Set_Completed_EO(current_lvl);
             if (current_lvl == "Lvl_1")
-                Game_Controller.L2_Locked = false;
+            {
+                game_controller.L2_Locked = false;
+                if (Score > game_controller.L1_HS)
+                    game_controller.L1_HS = Score;
+            }
             if (current_lvl == "Lvl_2")
-                Game_Controller.L3_Locked = false;
+            {
+                game_controller.L3_Locked = false;
+                if (Score > game_controller.L2_HS)
+                    game_controller.L2_HS = Score;
+            }
             if (current_lvl == "Lvl_3")
-                Game_Controller.L4_Locked = false;
+            {
+                game_controller.L4_Locked = false;
+                if (Score > game_controller.L3_HS)
+                    game_controller.L3_HS = Score;
+            }
+            if (current_lvl == "Lvl_4")
+            {
+                if (Score > game_controller.L4_HS)
+                    game_controller.L4_HS = Score;
+            }
+            //Extra_Objective.beat_lvl = true;
+            //target_hitted = 1;
         }
     }
 

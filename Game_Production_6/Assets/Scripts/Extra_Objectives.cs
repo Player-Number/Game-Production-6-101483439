@@ -19,10 +19,19 @@ public class Extra_Objectives : MonoBehaviour
     }
     public GameObject all_text;
 
+    public enum EO_Types
+    {
+        Timer,
+        Target,
+        Other
+    }
+
     public string current_lvl;
     public float collectables = 0;
     public float pots = 0;
+    public bool tar_air = false;
     public bool two_tar = false;
+    public bool beat_lvl = false;
 
     public bool B_L1_T;
     public bool B_L1_C;
@@ -53,25 +62,30 @@ public class Extra_Objectives : MonoBehaviour
         
     //}
 
-    public void Get_current_lvl(string lvl)
-    {
-        current_lvl = lvl;
-        if (current_lvl == "Lvl_1")
-        {
-            collectables = 2;
-            pots = 3;
-        }
-        else if (current_lvl == "Lvl_2")
-        {
-            collectables = 9;
-            pots = 2;
-        }
-        else if (current_lvl == "Lvl_3")
-        {
-            collectables = 9;
-            pots = 1;
-        }
-    }
+    //public void Get_current_lvl(string lvl)
+    //{
+    //    current_lvl = lvl;
+    //    //if (current_lvl == "Lvl_1")
+    //    //{
+    //    //    collectables = 2;
+    //    //    pots = 3;
+    //    //}
+    //    //else if (current_lvl == "Lvl_2")
+    //    //{
+    //    //    collectables = 9;
+    //    //    pots = 2;
+    //    //}
+    //    //else if (current_lvl == "Lvl_3")
+    //    //{
+    //    //    collectables = 9;
+    //    //    pots = 9;
+    //    //}
+    //    //else if (current_lvl == "Lvl_4")
+    //    //{
+    //    //    collectables = 2;
+    //    //    pots = 3;
+    //    //}
+    //}
 
     //public void Set_Completed_EO(string lvl)
     //{
@@ -99,16 +113,16 @@ public class Extra_Objectives : MonoBehaviour
     //    //O3 = Color.white;
     //}
 
-    public void L1_EO()
+    public void L1_EO(EO_Types t)
     {
-        if (FindAnyObjectByType<Timer>().timer >= 15)
+        if (FindAnyObjectByType<Timer>().timer >= 15 && t == EO_Types.Timer)
             B_L1_T = true;
-        if (collectables <= 0)
+        if (collectables >= 2)
             B_L1_C = true;
-        if (pots <= 0)
+        if (pots >= 3)
             B_L1_P = true;
     }
-    public void L2_EO()
+    public void L2_EO(EO_Types t)
     {
         if (two_tar)
             B_L2_T = true;
@@ -117,37 +131,39 @@ public class Extra_Objectives : MonoBehaviour
         if (pots <= 0)
             B_L2_P = true;
     }
-    public void L3_EO()
-    {
-        if (FindAnyObjectByType<Timer>().timer <= 1)
-            B_L3_T = true;
-        if (FindAnyObjectByType<Player>().Score >= 20)
-            B_L3_S = true;
-        if (FindAnyObjectByType<Player_Movement>().is_grounded == false)
-            B_L3_A = true;
-    }
-
-    public void L4_EO()
+    public void L3_EO(EO_Types t)
     {
         Player player = FindAnyObjectByType<Player>();
-        if (FindAnyObjectByType<Timer>().timer >= 1)
+        if (FindAnyObjectByType<Timer>().timer <= 1 && t == EO_Types.Timer)
             B_L3_T = true;
         if (player.Score >= 25)
             B_L3_S = true;
-        if (player.GetComponent<Player_Movement>().is_grounded == false && player.target_hitted == 1)
-        {
+        if (player.GetComponent<Player_Movement>().is_grounded == false && t == EO_Types.Target)
             B_L3_A = true;
-            player.target_hitted = 0;
-        }
+        //if (tar_air)
+        //    B_L3_A = true;
     }
 
-    public void Check_EO()
+    public void L4_EO(EO_Types t)
+    {
+        if (pots >= 2)
+            B_L4_P = true;
+        if (collectables >= 3)
+            B_L4_C = true;
+        if (FindAnyObjectByType<Timer>().timer >= 10 && t == EO_Types.Timer)
+            B_L4_T = true;
+
+    }
+
+    public void Check_EO(EO_Types t)
     {
         if (current_lvl == "Lvl_1")
-            L1_EO();
+            L1_EO(t);
         else if (current_lvl == "Lvl_2")
-            L2_EO();
+            L2_EO(t);
         else if (current_lvl == "Lvl_3")
-            L3_EO();
+            L3_EO(t);
+        else if (current_lvl == "Lvl_4")
+            L4_EO(t);
     }
 }

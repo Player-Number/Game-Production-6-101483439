@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
@@ -11,10 +12,29 @@ public class Timer : MonoBehaviour
     public float FB_in_effect_timer = 0;
     public float timer = 5;
     Image FB_effect;
+    private string current_lvl;
     bool in_FB = false;
     void Start()
     {
         FB_effect = FindAnyObjectByType<Player>().flash_bang.GetComponent<Image>();
+        current_lvl = SceneManager.GetActiveScene().name;
+        if (current_lvl == "Lvl_1")
+        {
+            timer = 30;
+        }
+        else if (current_lvl == "Lvl_2")
+        {
+            timer = 45;
+        }
+        else if (current_lvl == "Lvl_3")
+        {
+            timer = 15;
+        }
+        else if (current_lvl == "Lvl_4")
+        {
+            timer = 30;
+        }
+
     }
 
     void Update()

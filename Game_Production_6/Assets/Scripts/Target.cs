@@ -32,21 +32,21 @@ public class Target : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<Player>();
-        //if (target_type == Target_Types.Ex)
-        //{
-        //    Ex_vfx = GameObject.Find("Ex_Vfx").GetComponent<ParticleSystem>();
-        //    //Ex_vfx.Stop();
-        //}
         if (target_type == Target_Types.FB)
         {
             og_Fuse_mat = center.GetComponent<MeshRenderer>().material;
             Fuse_ticking_timer = max_Fuse_ticking_timer;
         }
+        //if (target_type == Target_Types.Ex)
+        //{
+        //    Ex_vfx = GameObject.Find("Ex_Vfx").GetComponent<ParticleSystem>();
+        //    //Ex_vfx.Stop();
+        //}
     }
 
     //void Update()
     //{
-        
+
     //}
     float HP = 3;
     public void Hit()
@@ -55,9 +55,7 @@ public class Target : MonoBehaviour
         {
             HP--;
             if (HP <= 0)
-            {
                 Target_Shot();
-            }
         }
         //else if (target_type == Target_Types.Ex)
         //{
@@ -66,7 +64,7 @@ public class Target : MonoBehaviour
         else if (target_type == Target_Types.FB)
         {
             StartCoroutine(FB());
-            StartCoroutine(Fuse_flashing());
+            StartCoroutine(Fuse_ticking(Fuse_mat));
         }
         else if (target_type == Target_Types.Shoot)
         {
@@ -92,24 +90,23 @@ public class Target : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    IEnumerator Fuse_flashing()
+    IEnumerator Fuse_ticking(Material fuse_mat_ticking)
     {
-        Material fuse_mat_ticking = Fuse_mat;
+        BoxCollider[] all_colliders = GetComponentsInChildren<BoxCollider>();
+        foreach (BoxCollider hitboxs in all_colliders)
+        {
+            hitboxs.enabled = false;
+        }
         for (int i = 0; i < 10; i++)
         {
             Outer.GetComponent<MeshRenderer>().material = fuse_mat_ticking;
             center.GetComponent<MeshRenderer>().material = fuse_mat_ticking;
             if (fuse_mat_ticking == Fuse_mat)
-            {
                 fuse_mat_ticking = og_Fuse_mat;
-            }
             else if (fuse_mat_ticking == og_Fuse_mat)
-            {
                 fuse_mat_ticking = Fuse_mat;
-            }
             yield return new WaitForSeconds(max_Fuse_ticking_timer);
         }
-        //yield return null;
     }
 
     //IEnumerator Explode()

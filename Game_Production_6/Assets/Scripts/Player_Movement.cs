@@ -15,7 +15,7 @@ public class Player_Movement : MonoBehaviour
 
     Rigidbody rb;
     //Settings Settings;
-    //GameObject Game_Controller;
+    //GameObject game_controller;
 
     public Transform Orientation;
     public Movement_State state;
@@ -75,7 +75,7 @@ public class Player_Movement : MonoBehaviour
         //Settings = FindAnyObjectByType<Settings>();
         //Settings.FOV_On_Val_Changed();
         //Dash_cool_bar.maxValue = dash_cool;
-        //Game_Controller = GameObject.Find("Game_Controller");
+        //game_controller = GameObject.Find("game_controller");
     }
 
     void Update()

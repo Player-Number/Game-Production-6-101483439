@@ -14,15 +14,21 @@ public class Game_Controller : MonoBehaviour
     public GameObject Close_button;
     public GameObject Resume_button;
     public GameObject To_Main_Menu_button;
-    //public TMP_Text Best_time_Text;
     public Canvas Main_Menu;
+    //public TMP_Text Best_time_Text;
     //public float Best_time = 0; // int.MaxValue
     public bool lock_mouse = false;
     public bool can_open_setting = true;
     bool is_setting_active = false;
+
     public bool L2_Locked = true;
     public bool L3_Locked = true;
     public bool L4_Locked = true;
+
+    public float L1_HS = 0;
+    public float L2_HS = 0;
+    public float L3_HS = 0;
+    public float L4_HS = 0;
     //public Slider FOV_Slider;
     //public bool disable_pause = true;
     //[SerializeField] TMP_Text Sensitivity_num;
@@ -98,31 +104,31 @@ public class Game_Controller : MonoBehaviour
         Change_Scene = FindAnyObjectByType<Change_Scene>();
         Change_Scene.Scene_To_Load("Main_Menu");
         Resume();
-        //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.gameObject.SetActive(true);
-        //Game_Controller.GetComponent<Game_Controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
+        //game_controller.GetComponent<game_controller>().Best_time_Text.gameObject.SetActive(true);
+        //game_controller.GetComponent<game_controller>().Best_time_Text.text = "Best Time: " + best_time.ToString("F2");
     }
 
     //public void Check_Scene(string name)
     //{
-    //    //GetComponent<Extra_Objectives>().all_text.transform.localScale = Vector3.zero;
+    //    //GetComponent<Extra_Objective>().all_text.transform.localScale = Vector3.zero;
     //    //if (name == "Lvl_Select")
     //    //{
-    //    //    GetComponent<Extra_Objectives>().all_text.transform.localScale = Vector3.one;
+    //    //    GetComponent<Extra_Objective>().all_text.transform.localScale = Vector3.one;
 
-    //    //    //for (int i = 0; i < Extra_Objectives.all_text.transform.childCount; i++)
+    //    //    //for (int i = 0; i < Extra_Objective.all_text.transform.childCount; i++)
     //    //    //{
     //    //    //    Debug.Log(i);
-    //    //    //    Extra_Objectives.all_text.transform.GetChild(i).gameObject.SetActive(true);
+    //    //    //    Extra_Objective.all_text.transform.GetChild(i).gameObject.SetActive(true);
     //    //    //}
-    //    //    //Extra_Objectives.all_text.SetActive(true);
-    //    //    //if (Extra_Objectives.L1_T == true)
+    //    //    //Extra_Objective.all_text.SetActive(true);
+    //    //    //if (Extra_Objective.L1_T == true)
     //    //    //    GameObject.Find("L1 15 sec").GetComponent<TMP_Text>().color = Color.gray;
-    //    //    //if (Extra_Objectives.L1_C == true)
+    //    //    //if (Extra_Objective.L1_C == true)
     //    //    //    GameObject.Find("L1 2 spheres").GetComponent<TMP_Text>().color = Color.gray;
-    //    //    //if (Extra_Objectives.L1_P == true)
+    //    //    //if (Extra_Objective.L1_P == true)
     //    //    //{
     //    //    //    GameObject.Find("L1 3 pots").GetComponent<TMP_Text>().color = Color.gray;
-    //    //    //    Debug.Log("Extra_Objectives.L1_P == true");
+    //    //    //    Debug.Log("Extra_Objective.L1_P == true");
     //    //    //}
 
     //    //}
@@ -143,7 +149,7 @@ public class Game_Controller : MonoBehaviour
     //public void Close_Settings()
     //{
     //    Setting_Menu.SetActive(false);
-    //    Audio_Manager.Play_SFX_Button_Pressed();
+    //    audio_manager.Play_SFX_Button_Pressed();
     //    is_setting_active = false;
     //    //Setting_button.SetActive(true);
     //}
