@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Extra_Objectives : MonoBehaviour
@@ -31,6 +32,14 @@ public class Extra_Objectives : MonoBehaviour
     public bool B_L2_S;
     public bool B_L2_P;
 
+    public bool B_L3_T;
+    public bool B_L3_S;
+    public bool B_L3_A;
+
+    public bool B_L4_P;
+    public bool B_L4_C;
+    public bool B_L4_T;
+
     //public Color O1 = Color.white;
     //public Color O2 = Color.white;
     //public Color O3 = Color.white;
@@ -54,12 +63,12 @@ public class Extra_Objectives : MonoBehaviour
         }
         else if (current_lvl == "Lvl_2")
         {
-            collectables = 1;
+            collectables = 9;
             pots = 2;
         }
         else if (current_lvl == "Lvl_3")
         {
-            collectables = 1;
+            collectables = 9;
             pots = 1;
         }
     }
@@ -110,22 +119,35 @@ public class Extra_Objectives : MonoBehaviour
     }
     public void L3_EO()
     {
-        
+        if (FindAnyObjectByType<Timer>().timer <= 1)
+            B_L3_T = true;
+        if (FindAnyObjectByType<Player>().Score >= 20)
+            B_L3_S = true;
+        if (FindAnyObjectByType<Player_Movement>().is_grounded == false)
+            B_L3_A = true;
+    }
+
+    public void L4_EO()
+    {
+        Player player = FindAnyObjectByType<Player>();
+        if (FindAnyObjectByType<Timer>().timer >= 1)
+            B_L3_T = true;
+        if (player.Score >= 25)
+            B_L3_S = true;
+        if (player.GetComponent<Player_Movement>().is_grounded == false && player.target_hitted == 1)
+        {
+            B_L3_A = true;
+            player.target_hitted = 0;
+        }
     }
 
     public void Check_EO()
     {
         if (current_lvl == "Lvl_1")
-        {
             L1_EO();
-        }
         else if (current_lvl == "Lvl_2")
-        {
             L2_EO();
-        }
         else if (current_lvl == "Lvl_3")
-        {
             L3_EO();
-        }
     }
 }

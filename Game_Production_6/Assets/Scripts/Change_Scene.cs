@@ -53,13 +53,17 @@ public class Change_Scene : MonoBehaviour
         else if (name == "Main_Menu")
         {
             //Audio_Manager.Stop_Music();
-            Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
             //Game_Controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
             Game_Controller.lock_mouse = false;
             Setting_Buttons_Not_In_Game();
             Game_Controller.can_open_setting = true;
+            Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
+        }
+        else if (name == "Lvl_Select")
+        {
+            Setting_Buttons_Not_In_Game();
         }
         else
         {

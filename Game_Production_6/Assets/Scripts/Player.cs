@@ -32,7 +32,8 @@ public class Player : MonoBehaviour
     public GameObject flash_bang;
      float Targets_Remaining = 0;
     public float Score = 0;
-    Vector3 reset_pos;
+    public float target_hitted = 0;
+    Vector3 respawn_pos;
 
     //[SerializeField] float Timer = 30;
     //public float door_power = 2;
@@ -52,9 +53,10 @@ public class Player : MonoBehaviour
         Game_Controller = FindAnyObjectByType<Game_Controller>();
         Audio_Manager = FindAnyObjectByType<Audio_Manager>();
         Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
+        current_lvl = SceneManager.GetActiveScene().name;
 
-        GameObject targets = GameObject.Find("Targets");
-        Targets_Remaining = targets.transform.childCount;
+        //GameObject targets = GameObject.Find("Targets");
+        Targets_Remaining = GameObject.Find("Targets").transform.childCount;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
         Audio_Manager.Play_Music(Audio_Manager.Gameplay);
@@ -62,8 +64,7 @@ public class Player : MonoBehaviour
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         Extra_Objectives.Get_current_lvl(SceneManager.GetActiveScene().name);
         Extra_Objectives.all_text.transform.localScale = Vector3.zero;
-        current_lvl = SceneManager.GetActiveScene().name;
-        reset_pos = transform.position;
+        respawn_pos = transform.position;
         Timer = FindAnyObjectByType<Timer>();
         if (current_lvl == "Lvl_1")
         {
@@ -121,7 +122,7 @@ public class Player : MonoBehaviour
             //    Door.GetComponent<Door>().enabled = true;
     }
 
-    private IEnumerator Fade_Out()
+    private IEnumerator Shoot_Effect_Fade_Out()
     {
         Material SE_mat = shoot_effect.material;
         for (float i = fade_duration; i >= 0; i -= Time.deltaTime)
@@ -137,7 +138,7 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 100))
         {
-            StartCoroutine(Fade_Out());
+            StartCoroutine(Shoot_Effect_Fade_Out());
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
             //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
             shoot_effect.SetPosition(0, Fire_Point.position);
@@ -175,6 +176,8 @@ public class Player : MonoBehaviour
                 Update_Score(1);
                 if (Extra_Objectives.pots > 0)
                     Extra_Objectives.pots--;
+                else
+                    Extra_Objectives.Check_EO();
             }
             //else if (hit_GO.CompareTag("Pierce"))
             //{
@@ -265,10 +268,13 @@ public class Player : MonoBehaviour
             Update_Score(1);
             if (Extra_Objectives.collectables > 0)
                 Extra_Objectives.collectables--;
+            else
+                Extra_Objectives.Check_EO();
+
         }
-        else if (other.gameObject.name == "Reset_Y")
+        else if (other.gameObject.name == "Respawn_Y")
         {
-            transform.position = reset_pos;
+            transform.position = respawn_pos;
         }
         else if (other.CompareTag("Main Menu"))
         {
@@ -282,6 +288,7 @@ public class Player : MonoBehaviour
     {
         Targets_Remaining--;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
+        target_hitted = 1;
         Extra_Objectives.Check_EO();
 
         if (Targets_Remaining <= 0)

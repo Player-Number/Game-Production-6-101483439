@@ -19,7 +19,7 @@ public class Lvl_Select : MonoBehaviour
 
     public TMP_Text L3_T;
     public TMP_Text L3_S;
-    public TMP_Text L3_P;
+    public TMP_Text L3_A;
 
     void Start()
     {
@@ -45,10 +45,16 @@ public class Lvl_Select : MonoBehaviour
             L2_S.color = Color.green;
         if (EO.B_L2_P)
             L2_P.color = Color.green;
-    }
 
-    void Update()
-    {
-        
+        if (EO.B_L3_T)
+            L3_T.color = Color.green;
+        if (EO.B_L3_S)
+            L3_S.color = Color.green;
+        if (EO.B_L3_A)
+            L3_A.color = Color.green;
     }
+    //void Update()
+    //{
+        
+    //}
 }
