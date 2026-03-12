@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Win_Screen;
     [SerializeField] GameObject Gameplay_UI;
     [SerializeField] Player_Movement Player_Movement;
-    [SerializeField] ParticleSystem Player_Death;
+    [SerializeField] ParticleSystem Collect_Effect;
+    [SerializeField] ParticleSystem Shoot_Impact_Effect;
     [SerializeField] LineRenderer shoot_effect;
     [SerializeField] private float fade_duration;
 
@@ -134,16 +135,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator Shoot_Effect_Fade_Out()
+    private IEnumerator Shoot_Effect_Fade_Out(LineRenderer SE)
     {
-        Material SE_mat = shoot_effect.material;
-        SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, 1f);
+        Material SE_mat = SE.material;
         for (float i = fade_duration; i >= 0; i -= Time.deltaTime)
         {
             SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, Mathf.Clamp01(i / fade_duration));
             yield return null;
         }
         SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, 0f);
+        Destroy(SE);
     }
 
     void Shooting()
@@ -151,12 +152,15 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 100))
         {
-            StartCoroutine(Shoot_Effect_Fade_Out());
             Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
-            shoot_effect.SetPosition(0, Fire_Point.position);
-            shoot_effect.SetPosition(1, hit.point);
-            //LineRenderer shot_effect_inst = Instantiate(shoot_effect);
-            //Destroy(shot_effect_inst, 1);
+            //shoot_effect.SetPosition(0, Fire_Point.position);
+            //shoot_effect.SetPosition(1, hit.point);
+            LineRenderer shot_effect_inst = Instantiate(shoot_effect);
+            StartCoroutine(Shoot_Effect_Fade_Out(shot_effect_inst));
+            shot_effect_inst.SetPosition(0, Fire_Point.position);
+            shot_effect_inst.SetPosition(1, hit.point);
+            Instantiate(Shoot_Impact_Effect.gameObject, hit.point, Quaternion.identity);
+
             GameObject hit_GO = hit.collider.gameObject;
             if (hit_GO.CompareTag("Target") || hit_GO.CompareTag("Target_Tank"))
             {
@@ -279,7 +283,7 @@ public class Player : MonoBehaviour
             Update_Score(1);
             Extra_Objective.collectables++;
             Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
-
+            Instantiate(Collect_Effect, other.GetComponent<SphereCollider>().transform.position, Quaternion.identity);
         }
         else if (other.gameObject.name == "Respawn_Y")
         {
