@@ -17,6 +17,7 @@ public class Settings : MonoBehaviour
     {
         //Set_Music_Vol();
         //Set_SFX_Vol();
+        Sensitivity_On_Val_Changed();
         if (PlayerPrefs.HasKey("Music_Vol"))
         {
             Load_Music_Vol();

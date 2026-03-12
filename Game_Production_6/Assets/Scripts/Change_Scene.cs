@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Change_Scene : MonoBehaviour
 {
-    Game_Controller Game_Controller;
+    Game_Controller game_controller;
     Audio_Manager Audio_Manager;
     //Extra_Objectives Extra_Objectives;
     //string scene_name;
@@ -14,7 +14,7 @@ public class Change_Scene : MonoBehaviour
 
     void Start()
     {
-        Game_Controller = FindAnyObjectByType<Game_Controller>();
+        game_controller = FindAnyObjectByType<Game_Controller>();
         Audio_Manager = FindAnyObjectByType<Audio_Manager>();
         //Extra_Objectives = FindAnyObjectByType<Extra_Objectives>();
     }
@@ -52,7 +52,8 @@ public class Change_Scene : MonoBehaviour
         {
             Time.timeScale = 1;
             Setting_Buttons_Not_In_Game();
-            Game_Controller.can_open_setting = true;
+            game_controller.can_open_setting = true;
+            game_controller.lock_mouse = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
@@ -134,29 +135,29 @@ public class Change_Scene : MonoBehaviour
 
     public void Quit()
     {
-        Audio_Manager.Play_SFX_Button_Pressed();
         Application.Quit();
+        Audio_Manager.Play_SFX_Button_Pressed();
     }
 
     public void Open_Settings()
     {
-        Game_Controller.Setting_Menu.SetActive(true);
+        game_controller.Setting_Menu.SetActive(true);
         Audio_Manager.Play_SFX_Button_Pressed();
     }
 
     void Setting_Buttons_Not_In_Game()
     {
-        Game_Controller.Close_button.SetActive(true);
-        Game_Controller.Resume_button.SetActive(false);
-        Game_Controller.To_Main_Menu_button.SetActive(false);
+        game_controller.Close_button.SetActive(true);
+        game_controller.Resume_button.SetActive(false);
+        game_controller.To_Main_Menu_button.SetActive(false);
         //game_controller.disable_pause = true;
     }
 
     public void Setting_Buttons_In_Game()
     {
-        Game_Controller.Close_button.SetActive(false);
-        Game_Controller.Resume_button.SetActive(true);
-        Game_Controller.To_Main_Menu_button.SetActive(true);
+        game_controller.Close_button.SetActive(false);
+        game_controller.Resume_button.SetActive(true);
+        game_controller.To_Main_Menu_button.SetActive(true);
         //game_controller.disable_pause = false;
     }
 }

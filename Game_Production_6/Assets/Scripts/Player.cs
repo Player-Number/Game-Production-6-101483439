@@ -60,25 +60,24 @@ public class Player : MonoBehaviour
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
         audio_manager.Play_Music(audio_manager.Gameplay);
-        //game_controller.lock_mouse = true;
+        game_controller.lock_mouse = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         Extra_Objective.all_text.transform.localScale = Vector3.zero;
         respawn_pos = transform.position;
-        Extra_Objective.current_lvl = SceneManager.GetActiveScene().name;
-        current_lvl = SceneManager.GetActiveScene().name;
+
+        Extra_Objective.collectables = 0;
+        Extra_Objective.pots = 0;
+
+        //Extra_Objective.current_lvl = SceneManager.GetActiveScene().name;
+        //current_lvl = SceneManager.GetActiveScene().name;
         //if (Extra_Objective.tar_air == false)
         //{
 
         //}
 
-        Extra_Objective.collectables = 0;
-        Extra_Objective.pots = 0;
-
-
-        //current_lvl = SceneManager.GetActiveScene().name;
         //if (current_lvl == "Lvl_1")
         //{
         //    Timer_cs.timer = 30;
@@ -312,6 +311,8 @@ public class Player : MonoBehaviour
 
             //current_lvl = SceneManager.GetActiveScene().name;
             //Extra_Objective.Set_Completed_EO(current_lvl);
+            current_lvl = SceneManager.GetActiveScene().name;
+
             if (current_lvl == "Lvl_1")
             {
                 game_controller.L2_Locked = false;

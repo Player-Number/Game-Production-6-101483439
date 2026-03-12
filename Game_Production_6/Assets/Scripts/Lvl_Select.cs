@@ -34,6 +34,7 @@ public class Lvl_Select : MonoBehaviour
     {
         GC = FindAnyObjectByType<Game_Controller>();
         EO = FindAnyObjectByType<Extra_Objectives>();
+
         Lock();
         EO_Text();
         HS();

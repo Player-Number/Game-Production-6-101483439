@@ -17,7 +17,7 @@ public class Game_Controller : MonoBehaviour
     public Canvas Main_Menu;
     //public TMP_Text Best_time_Text;
     //public float Best_time = 0; // int.MaxValue
-    //public bool lock_mouse = false;
+    public bool lock_mouse = false;
     public bool can_open_setting = true;
     bool is_setting_active = false;
 
@@ -41,6 +41,7 @@ public class Game_Controller : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            //gameObject.SetActive(false);
             Destroy(gameObject);
         }
         else
@@ -50,10 +51,10 @@ public class Game_Controller : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //Load_Best_Time();
-    }
+    //private void Start()
+    //{
+    //    //Load_Best_Time();
+    //}
 
     void Update()
     {
@@ -78,10 +79,14 @@ public class Game_Controller : MonoBehaviour
                 Resume();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 1;
+            Application.Quit();
         }
+        //else if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    Time.timeScale = 1;
+        //}
     }
 
     public void Resume()
@@ -92,11 +97,12 @@ public class Game_Controller : MonoBehaviour
         Audio_Manager.Play_SFX_Button_Pressed();
         Audio_Manager.Play_SFX(); // resume gameplay audio
         Setting_BG_Not_Visible.SetActive(is_setting_active);
-        //if (lock_mouse)
-        //{
-        //    Cursor.visible = false;
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //}
+
+        if (lock_mouse) // stop lock_mouse when return to main menu
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     public void To_Main_Menu()

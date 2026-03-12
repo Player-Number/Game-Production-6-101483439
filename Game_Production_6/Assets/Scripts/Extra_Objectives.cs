@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Extra_Objectives : MonoBehaviour
 {
@@ -157,6 +158,7 @@ public class Extra_Objectives : MonoBehaviour
 
     public void Check_EO(EO_Types t)
     {
+        current_lvl = SceneManager.GetActiveScene().name;
         if (current_lvl == "Lvl_1")
             L1_EO(t);
         else if (current_lvl == "Lvl_2")
