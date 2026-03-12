@@ -50,15 +50,14 @@ public class Change_Scene : MonoBehaviour
         }
         else if (name == "Main_Menu")
         {
-            //audio_manager.Stop_Music();
-            //game_controller.Best_time_Text.gameObject.SetActive(true);
             Time.timeScale = 1;
-            Game_Controller.lock_mouse = false;
             Setting_Buttons_Not_In_Game();
             Game_Controller.can_open_setting = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Audio_Manager.Play_Music(Audio_Manager.Main_Menu);
+            //audio_manager.Stop_Music();
+            //game_controller.Best_time_Text.gameObject.SetActive(true);
             //GameObject.Find("Panel_BG").GetComponent<Image>().material = null;
         }
         else if (name == "Lvl_Select")

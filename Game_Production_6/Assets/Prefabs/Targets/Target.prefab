@@ -231,9 +231,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1242027357335728648}
-  - component: {fileID: 3602468650530910475}
-  - component: {fileID: 1016645823292702097}
   - component: {fileID: -3999372403283350800}
+  - component: {fileID: 1016645823292702097}
   m_Layer: 0
   m_Name: Target
   m_TagString: Target
@@ -259,27 +258,28 @@ Transform:
   - {fileID: 6135562742952167282}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!65 &3602468650530910475
-BoxCollider:
+--- !u!114 &-3999372403283350800
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7294676812644454197}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Target
+  target_type: 0
+  Ex_vfx: {fileID: 0}
+  FB_vfx: {fileID: 0}
+  FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  projectile: {fileID: 0}
+  Fuse_mat: {fileID: 0}
+  Fuse: 0
+  max_Fuse_ticking_timer: 0
 --- !u!114 &1016645823292702097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,25 +298,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &-3999372403283350800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7294676812644454197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Target
-  target_type: 0
-  hor_speed: 0
-  ver_speed: 0
-  hor_dis: 0
-  ver_dis: 0
-  custom_move_speed_factor: 0
-  path_points: []
 --- !u!1 &7541319223433057854
 GameObject:
   m_ObjectHideFlags: 0

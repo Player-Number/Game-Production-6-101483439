@@ -16,6 +16,20 @@ public class Audio_Manager : MonoBehaviour
     public AudioClip Shooting;
     //public AudioClip Button_Pressed;
     //public AudioClip Win;
+    public static Audio_Manager Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void Start()
     {

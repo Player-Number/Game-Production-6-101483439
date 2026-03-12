@@ -231,9 +231,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8357011122695551596}
-  - component: {fileID: 8555885457927782697}
-  - component: {fileID: 1289320906958822402}
   - component: {fileID: 3931356087327414905}
+  - component: {fileID: 1289320906958822402}
   m_Layer: 0
   m_Name: FB_Target
   m_TagString: Target
@@ -261,45 +260,6 @@ Transform:
   - {fileID: 7101605579958544112}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!65 &8555885457927782697
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8405760452791594124}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1289320906958822402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8405760452791594124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 2
-  outlineColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &3931356087327414905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,9 +278,28 @@ MonoBehaviour:
   FB_Effect: {fileID: 1731990350893215762, guid: 4a387d95fde05ad44a6f14b4d3a4e926, type: 3}
   Outer: {fileID: 855081331082933573}
   center: {fileID: 1566086369506284384}
+  projectile: {fileID: 0}
   Fuse_mat: {fileID: 2100000, guid: 1e8d0313ec07eef4da527c794b8e010e, type: 2}
   Fuse: 2
   max_Fuse_ticking_timer: 0.25
+--- !u!114 &1289320906958822402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405760452791594124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 2
+  outlineColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8877118067046528741
 GameObject:
   m_ObjectHideFlags: 0

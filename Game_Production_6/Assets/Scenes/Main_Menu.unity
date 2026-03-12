@@ -3822,12 +3822,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887443443}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2070214123}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &887443445
 MonoBehaviour:
@@ -3845,6 +3845,7 @@ MonoBehaviour:
   current_lvl: 
   collectables: 0
   pots: 0
+  tar_air: 0
   two_tar: 0
   beat_lvl: 0
   B_L1_T: 0
@@ -8467,7 +8468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985562841}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8475,7 +8476,7 @@ Transform:
   - {fileID: 603962863}
   - {fileID: 2135975081}
   - {fileID: 132672561}
-  m_Father: {fileID: 2070214123}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1985562843
 MonoBehaviour:
@@ -8692,10 +8693,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1985562842}
   - {fileID: 52777905}
   - {fileID: 1837148028}
-  - {fileID: 887443444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2070214124
@@ -9120,6 +9119,8 @@ SceneRoots:
   - {fileID: 681017732}
   - {fileID: 662993242}
   - {fileID: 1251564838}
-  - {fileID: 2070214123}
   - {fileID: 1651781263}
   - {fileID: 925318295}
+  - {fileID: 2070214123}
+  - {fileID: 1985562842}
+  - {fileID: 887443444}

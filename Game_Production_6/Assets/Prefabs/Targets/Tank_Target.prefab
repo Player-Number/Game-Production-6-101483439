@@ -231,9 +231,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 420397671117126233}
-  - component: {fileID: 1061830639892366844}
-  - component: {fileID: 9222981059934856572}
   - component: {fileID: -5642227653409934465}
+  - component: {fileID: 9222981059934856572}
   m_Layer: 0
   m_Name: Tank_Target
   m_TagString: Target
@@ -259,27 +258,28 @@ Transform:
   - {fileID: 7258901218758573314}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!65 &1061830639892366844
-BoxCollider:
+--- !u!114 &-5642227653409934465
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6485737389955827860}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Target
+  target_type: 5
+  Ex_vfx: {fileID: 0}
+  FB_vfx: {fileID: 0}
+  FB_Effect: {fileID: 0}
+  Outer: {fileID: 0}
+  center: {fileID: 0}
+  projectile: {fileID: 0}
+  Fuse_mat: {fileID: 0}
+  Fuse: 0
+  max_Fuse_ticking_timer: 0
 --- !u!114 &9222981059934856572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,23 +298,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &-5642227653409934465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6485737389955827860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb07383bdcf43974e88a964a1ccad4d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Target
-  target_type: 5
-  Ex_vfx: {fileID: 0}
-  FB_vfx: {fileID: 0}
-  FB_Effect: {fileID: 0}
-  Fuse: 0
 --- !u!1 &8847840439144903744
 GameObject:
   m_ObjectHideFlags: 0

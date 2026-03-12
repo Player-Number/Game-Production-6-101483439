@@ -59,12 +59,15 @@ public class Player : MonoBehaviour
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Time.timeScale = 1;
         audio_manager.Play_Music(audio_manager.Gameplay);
-        game_controller.lock_mouse = true;
+        //game_controller.lock_mouse = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         Extra_Objective.all_text.transform.localScale = Vector3.zero;
         respawn_pos = transform.position;
         Extra_Objective.current_lvl = SceneManager.GetActiveScene().name;
-
+        current_lvl = SceneManager.GetActiveScene().name;
         //if (Extra_Objective.tar_air == false)
         //{
 
@@ -129,13 +132,12 @@ public class Player : MonoBehaviour
         {
             Destoryed_Target();
         }
-            //else if (Input.GetKeyDown(KeyCode.R))
-            //    Door.GetComponent<Door>().enabled = true;
     }
 
     private IEnumerator Shoot_Effect_Fade_Out()
     {
         Material SE_mat = shoot_effect.material;
+        SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, 1f);
         for (float i = fade_duration; i >= 0; i -= Time.deltaTime)
         {
             SE_mat.color = new Color(SE_mat.color.r, SE_mat.color.g, SE_mat.color.b, Mathf.Clamp01(i / fade_duration));
@@ -295,16 +297,12 @@ public class Player : MonoBehaviour
         Targets_Remaining--;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
         Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Target);
-        //if (GetComponent<Player_Movement>().is_grounded == false && current_lvl == "Lvl_3")
-        //{
-        //    Extra_Objective.tar_air = true;
-        //}
+
         if (Targets_Remaining <= 0) // win
         {
             Win_Screen.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
             game_controller.can_open_setting = false;
             Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Timer);
 
@@ -333,6 +331,8 @@ public class Player : MonoBehaviour
                 if (Score > game_controller.L4_HS)
                     game_controller.L4_HS = Score;
             }
+            Time.timeScale = 0;
+
             //Extra_Objective.beat_lvl = true;
             //target_hitted = 1;
         }
@@ -340,13 +340,13 @@ public class Player : MonoBehaviour
 
     void Hit_target(GameObject Hit_GO)
     {
-        Hit_GO.GetComponentInParent<Target>().Hit();
         if (Hit_GO.layer == 6)
             Update_Score(1);
         if (Hit_GO.layer == 7)
             Update_Score(2);
         if (Hit_GO.layer == 8)
             Update_Score(3);
+        Hit_GO.GetComponentInParent<Target>().Hit();
     }
 
     void Update_Score(float val)
