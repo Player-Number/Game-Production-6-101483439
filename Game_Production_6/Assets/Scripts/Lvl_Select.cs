@@ -6,11 +6,18 @@ public class Lvl_Select : MonoBehaviour
     [SerializeField] GameObject L2_Lock;
     [SerializeField] GameObject L3_Lock;
     [SerializeField] GameObject L4_Lock;
+    [SerializeField] GameObject L5_Lock;
+    [SerializeField] GameObject L6_Lock;
 
     [SerializeField] TMP_Text L1_HS_Text;
     [SerializeField] TMP_Text L2_HS_Text;
     [SerializeField] TMP_Text L3_HS_Text;
     [SerializeField] TMP_Text L4_HS_Text;
+    [SerializeField] TMP_Text L5_HS_Text;
+    [SerializeField] TMP_Text L6_HS_Text;
+
+    [SerializeField] GameObject PG1_Lvls;
+    [SerializeField] GameObject PG2_Lvls;
     Game_Controller GC;
     Extra_Objectives EO;
 
@@ -48,6 +55,10 @@ public class Lvl_Select : MonoBehaviour
             L3_Lock.SetActive(false);
         if (GC.L4_Locked == false)
             L4_Lock.SetActive(false);
+        if (GC.L5_Locked == false)
+            L5_Lock.SetActive(false);
+        if (GC.L6_Locked == false)
+            L6_Lock.SetActive(false);
 
     }
 
@@ -88,6 +99,8 @@ public class Lvl_Select : MonoBehaviour
         L2_HS_Text.text = "HS: " + GC.L2_HS;
         L3_HS_Text.text = "HS: " + GC.L3_HS;
         L4_HS_Text.text = "HS: " + GC.L4_HS;
+        L5_HS_Text.text = "HS: " + GC.L5_HS;
+        L6_HS_Text.text = "HS: " + GC.L6_HS;
     }
     void Update()
     {
@@ -96,10 +109,32 @@ public class Lvl_Select : MonoBehaviour
             L2_Lock.SetActive(false);
             L3_Lock.SetActive(false);
             L4_Lock.SetActive(false);
+            L5_Lock.SetActive(false);
+            L6_Lock.SetActive(false);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Lvl_2");
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Lvl_3");
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Lvl_4");
         else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
             FindAnyObjectByType<Change_Scene>().Scene_To_Load("Lvl_5");
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Lvl_6");
+    }
+
+    public void Change_PG(int pg)
+    {
+        if (pg == 1)
+        {
+            PG1_Lvls.SetActive(true);
+            PG2_Lvls.SetActive(false);
+        }
+        else if (pg == 2)
+        {
+            PG1_Lvls.SetActive(false);
+            PG2_Lvls.SetActive(true);
         }
     }
 }

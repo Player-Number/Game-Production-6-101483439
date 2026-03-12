@@ -15,20 +15,24 @@ public class Game_Controller : MonoBehaviour
     public GameObject Resume_button;
     public GameObject To_Main_Menu_button;
     public Canvas Main_Menu;
-    //public TMP_Text Best_time_Text;
-    //public float Best_time = 0; // int.MaxValue
     public bool lock_mouse = false;
     public bool can_open_setting = true;
     bool is_setting_active = false;
+    //public TMP_Text Best_time_Text;
+    //public float Best_time = 0; // int.MaxValue
 
     public bool L2_Locked = true;
     public bool L3_Locked = true;
     public bool L4_Locked = true;
+    public bool L5_Locked = true;
+    public bool L6_Locked = true;
 
     public float L1_HS = 0;
     public float L2_HS = 0;
     public float L3_HS = 0;
     public float L4_HS = 0;
+    public float L5_HS = 0;
+    public float L6_HS = 0;
     //public Slider FOV_Slider;
     //public bool disable_pause = true;
     //[SerializeField] TMP_Text Sensitivity_num;
