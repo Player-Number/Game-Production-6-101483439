@@ -7545,7 +7545,7 @@ GameObject:
   - component: {fileID: 1837148030}
   - component: {fileID: 1837148029}
   m_Layer: 5
-  m_Name: Canvas (EO
+  m_Name: old)Canvas (EO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8676,10 +8676,14 @@ MonoBehaviour:
   L2_Locked: 1
   L3_Locked: 1
   L4_Locked: 1
+  L5_Locked: 1
+  L6_Locked: 1
   L1_HS: 0
   L2_HS: 0
   L3_HS: 0
   L4_HS: 0
+  L5_HS: 0
+  L6_HS: 0
 --- !u!4 &2070214123
 Transform:
   m_ObjectHideFlags: 0
