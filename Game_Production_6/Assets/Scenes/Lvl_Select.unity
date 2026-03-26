@@ -3869,10 +3869,14 @@ MonoBehaviour:
   L2_Lock: {fileID: 86968803}
   L3_Lock: {fileID: 1613639295}
   L4_Lock: {fileID: 40695511}
+  L5_Lock: {fileID: 1581479858}
+  L6_Lock: {fileID: 2049447507}
   L1_HS_Text: {fileID: 963970594}
   L2_HS_Text: {fileID: 21864859}
   L3_HS_Text: {fileID: 1609245381}
   L4_HS_Text: {fileID: 703544251}
+  L5_HS_Text: {fileID: 1356271580}
+  L6_HS_Text: {fileID: 1232207826}
   PG1_Lvls: {fileID: 1024152279}
   PG2_Lvls: {fileID: 137647706}
   L1_T: {fileID: 1917889602}

@@ -279,9 +279,10 @@ MonoBehaviour:
   Outer: {fileID: 855081331082933573}
   center: {fileID: 1566086369506284384}
   projectile: {fileID: 0}
+  Obj_to_destory: []
   Fuse_mat: {fileID: 2100000, guid: 1e8d0313ec07eef4da527c794b8e010e, type: 2}
   Fuse: 2
-  max_Fuse_ticking_timer: 0.25
+  Fuse_ticking_timer: 0.25
 --- !u!114 &1289320906958822402
 MonoBehaviour:
   m_ObjectHideFlags: 0

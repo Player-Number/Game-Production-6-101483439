@@ -12,6 +12,7 @@ TagManager:
   - Target_Tank
   - FxTemporaire
   - Main Menu
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Outer
   - White
   - Mid
-  - 
+  - Checkpoint
   - 
   - 
   - 

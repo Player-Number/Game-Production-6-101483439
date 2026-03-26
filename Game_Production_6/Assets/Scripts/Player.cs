@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Pause_Menu;
     [SerializeField] GameObject Win_Screen;
     [SerializeField] GameObject Gameplay_UI;
+    [SerializeField] LayerMask Checkpoint_Layer;
     [SerializeField] Player_Movement Player_Movement;
     [SerializeField] ParticleSystem Collect_Effect;
     [SerializeField] ParticleSystem Shoot_Impact_Effect;
@@ -34,12 +35,13 @@ public class Player : MonoBehaviour
      float Targets_Remaining = 0;
     public float Score = 0;
     Vector3 respawn_pos;
+    string current_lvl;
 
+    //int layerMask = ~LayerMask.GetMask("TargetLayer");    
     //[SerializeField] float Timer_cs = 30;
     //public float target_hitted = 0;
     //public float door_power = 2;
     //Vector3 new_room_trigger_pos;
-    string current_lvl;
 
     [Header("Text")]
     [SerializeField] TMP_Text Targets_Text;
@@ -102,13 +104,11 @@ public class Player : MonoBehaviour
 
         //move_input = input_actions.FindAction("Move");
         //new_room_trigger_pos = transform.position; 
-
     }
 
     void Update()
     {
         Other_Actions();
-
         //Timer_cs -= Time.deltaTime;
         //Timer_Text.text = Timer_cs.ToString("F2");
         //if (Timer_cs <= 0)
@@ -148,10 +148,9 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-
-        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 100))
+        if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out RaycastHit hit, 100, ~Checkpoint_Layer))
         {
-            Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
+            //Debug.DrawRay(Fire_Point.position, Camera.main.transform.forward * hit.distance, Color.green, 1);
             //shoot_effect.SetPosition(0, Fire_Point.position);
             //shoot_effect.SetPosition(1, hit.point);
             LineRenderer shot_effect_inst = Instantiate(shoot_effect);
@@ -224,6 +223,111 @@ public class Player : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectable"))
+        {
+            other.gameObject.SetActive(false);
+            Update_Score(1);
+            Extra_Objective.collectables++;
+            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
+            Instantiate(Collect_Effect, other.GetComponent<SphereCollider>().transform.position, Quaternion.identity);
+        }
+        else if (other.CompareTag("Checkpoint"))
+        {
+            respawn_pos = other.transform.position;
+        }
+        else if (other.CompareTag("Main Menu"))
+        {
+            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Main_Menu");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Respawn_Y")
+        {
+            transform.position = respawn_pos;
+        }
+    }
+
+    public void Destoryed_Target()
+    {
+        Targets_Remaining--;
+        Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
+        Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Target);
+
+        if (Targets_Remaining <= 0) // win
+        {
+            Win_Screen.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            game_controller.can_open_setting = false;
+            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Timer);
+
+            //current_lvl = SceneManager.GetActiveScene().name;
+            //Extra_Objective.Set_Completed_EO(current_lvl);
+            current_lvl = SceneManager.GetActiveScene().name;
+
+            if (current_lvl == "Lvl_1")
+            {
+                game_controller.L2_Locked = false;
+                if (Score > game_controller.L1_HS)
+                    game_controller.L1_HS = Score;
+            }
+            if (current_lvl == "Lvl_2")
+            {
+                game_controller.L3_Locked = false;
+                if (Score > game_controller.L2_HS)
+                    game_controller.L2_HS = Score;
+            }
+            if (current_lvl == "Lvl_3")
+            {
+                game_controller.L4_Locked = false;
+                if (Score > game_controller.L3_HS)
+                    game_controller.L3_HS = Score;
+            }
+            if (current_lvl == "Lvl_4")
+            {
+                game_controller.L5_Locked = false;
+                if (Score > game_controller.L4_HS)
+                    game_controller.L4_HS = Score;
+            }
+            if (current_lvl == "Lvl_5")
+            {
+                game_controller.L6_Locked = false;
+                if (Score > game_controller.L5_HS)
+                    game_controller.L5_HS = Score;
+            }
+            Time.timeScale = 0;
+
+            //Extra_Objective.beat_lvl = true;
+            //target_hitted = 1;
+        }
+    }
+
+    void Hit_target(GameObject Hit_GO)
+    {
+        if (Hit_GO.layer == 6)
+            Update_Score(1);
+        if (Hit_GO.layer == 7)
+            Update_Score(2);
+        if (Hit_GO.layer == 8)
+            Update_Score(3);
+        Hit_GO.GetComponentInParent<Target>().Hit();
+    }
+
+    void Update_Score(float val)
+    {
+        Score += val;
+        Score_Text.text = "Score: " + Score;
+    }
+
+    public void In_How_Play_Lvl()
+    {
+        Targets_Remaining = int.MaxValue;
+    }
+
     //private void OnTriggerEnter(Collider other)
     //{
     //    if (other.CompareTag("Collectable"))
@@ -273,95 +377,4 @@ public class Player : MonoBehaviour
     //            Best_time_end_Text.text = "Best Time: " + game_controller.Best_time.ToString("F2");
     //    }
     //}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Collectable"))
-        {
-            other.gameObject.SetActive(false);
-            Update_Score(1);
-            Extra_Objective.collectables++;
-            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
-            Instantiate(Collect_Effect, other.GetComponent<SphereCollider>().transform.position, Quaternion.identity);
-        }
-        else if (other.gameObject.name == "Respawn_Y")
-        {
-            transform.position = respawn_pos;
-        }
-        else if (other.CompareTag("Main Menu"))
-        {
-            FindAnyObjectByType<Change_Scene>().Scene_To_Load("Main_Menu");
-        }
-
-    }
-
-    public void Destoryed_Target()
-    {
-        Targets_Remaining--;
-        Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
-        Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Target);
-
-        if (Targets_Remaining <= 0) // win
-        {
-            Win_Screen.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            game_controller.can_open_setting = false;
-            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Timer);
-
-            //current_lvl = SceneManager.GetActiveScene().name;
-            //Extra_Objective.Set_Completed_EO(current_lvl);
-            current_lvl = SceneManager.GetActiveScene().name;
-
-            if (current_lvl == "Lvl_1")
-            {
-                game_controller.L2_Locked = false;
-                if (Score > game_controller.L1_HS)
-                    game_controller.L1_HS = Score;
-            }
-            if (current_lvl == "Lvl_2")
-            {
-                game_controller.L3_Locked = false;
-                if (Score > game_controller.L2_HS)
-                    game_controller.L2_HS = Score;
-            }
-            if (current_lvl == "Lvl_3")
-            {
-                game_controller.L4_Locked = false;
-                if (Score > game_controller.L3_HS)
-                    game_controller.L3_HS = Score;
-            }
-            if (current_lvl == "Lvl_4")
-            {
-                if (Score > game_controller.L4_HS)
-                    game_controller.L4_HS = Score;
-            }
-            Time.timeScale = 0;
-
-            //Extra_Objective.beat_lvl = true;
-            //target_hitted = 1;
-        }
-    }
-
-    void Hit_target(GameObject Hit_GO)
-    {
-        if (Hit_GO.layer == 6)
-            Update_Score(1);
-        if (Hit_GO.layer == 7)
-            Update_Score(2);
-        if (Hit_GO.layer == 8)
-            Update_Score(3);
-        Hit_GO.GetComponentInParent<Target>().Hit();
-    }
-
-    void Update_Score(float val)
-    {
-        Score += val;
-        Score_Text.text = "Score: " + Score;
-    }
-
-    public void In_How_Play_Lvl()
-    {
-        Targets_Remaining = int.MaxValue;
-    }
 }

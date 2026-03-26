@@ -3810,6 +3810,9 @@ MonoBehaviour:
   Pause_Menu: {fileID: 1934539465696840614}
   Win_Screen: {fileID: 8079575152172206007}
   Gameplay_UI: {fileID: 8012885641601516700}
+  Checkpoint_Layer:
+    serializedVersion: 2
+    m_Bits: 512
   Player_Movement: {fileID: 7516076553075516603}
   Collect_Effect: {fileID: 8771972552311404798, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
   Shoot_Impact_Effect: {fileID: 5880797563141009103, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
