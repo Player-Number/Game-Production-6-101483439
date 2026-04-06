@@ -234,21 +234,15 @@ public class Player : MonoBehaviour
             Instantiate(Collect_Effect, other.GetComponent<SphereCollider>().transform.position, Quaternion.identity);
         }
         else if (other.CompareTag("Checkpoint"))
-        {
             respawn_pos = other.transform.position;
-        }
         else if (other.CompareTag("Main Menu"))
-        {
             FindAnyObjectByType<Change_Scene>().Scene_To_Load("Main_Menu");
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Respawn_Y")
-        {
             transform.position = respawn_pos;
-        }
     }
 
     public void Destoryed_Target()
