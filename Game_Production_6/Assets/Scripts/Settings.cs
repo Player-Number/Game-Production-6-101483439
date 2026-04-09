@@ -1,13 +1,25 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static Settings;
 
 public class Settings : MonoBehaviour
 {
     [SerializeField] AudioMixer Audio_Mixer;
     [SerializeField] Slider Music_Silder;
     [SerializeField] Slider SFX_Silder;
+
+    [SerializeField] List<GameObject> EO_Texts;
+    [SerializeField] GameObject EO1;
+    [SerializeField] GameObject EO2;
+    [SerializeField] GameObject EO3;
+    [SerializeField] GameObject EO4;
+    [SerializeField] GameObject EO5;
+    [SerializeField] GameObject EO_How_Play;
+
     public Slider Sensitivity_Slider;
     public Slider FOV_Slider;
     Player_Movement Player_Movement;
@@ -19,31 +31,40 @@ public class Settings : MonoBehaviour
         //Set_SFX_Vol();
         Sensitivity_On_Val_Changed();
         if (PlayerPrefs.HasKey("Music_Vol"))
-        {
             Load_Music_Vol();
-        }
         else
-        {
             Set_Music_Vol();
-        }
         if (PlayerPrefs.HasKey("SFX_Vol"))
-        {
             Load_SFX_Vol();
-        }
         else
-        {
             Set_SFX_Vol();
-        }
         if (PlayerPrefs.HasKey("Sensitivity_Slider"))
-        {
             Sensitivity_Slider.value = PlayerPrefs.GetFloat("Sensitivity_Slider", 200);
-        }
     }
 
-    //void Update()
-    //{
+    public void Setting_EO(string cur_lvl)
+    {
+        if (cur_lvl == "Lvl_1")
+            Activate_EO(EO1);
+        else if (cur_lvl == "Lvl_2")
+            Activate_EO(EO2);
+        else if (cur_lvl == "Lvl_3")
+            Activate_EO(EO3);
+        else if (cur_lvl == "Lvl_4")
+            Activate_EO(EO4);
+        else if (cur_lvl == "Lvl_5")
+            Activate_EO(EO5);
+        else
+            Activate_EO(EO_How_Play);
+    }
 
-    //}
+    private void Activate_EO(GameObject EO_To_Set_Active)
+    {
+        foreach (var EO in EO_Texts)
+            EO.SetActive(false);
+
+        EO_To_Set_Active.SetActive(true);
+    }
 
     public void Set_Music_Vol()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Settings;
 
 public class Player : MonoBehaviour
 {
@@ -26,7 +27,8 @@ public class Player : MonoBehaviour
 
     Game_Controller game_controller;
     Audio_Manager audio_manager;
-    Extra_Objectives Extra_Objective;
+    Extra_Objectives extra_objective;
+    Settings settings;
     Timer Timer_cs;
     //public GameObject Door;
 
@@ -55,7 +57,8 @@ public class Player : MonoBehaviour
     {
         game_controller = FindAnyObjectByType<Game_Controller>();
         audio_manager = FindAnyObjectByType<Audio_Manager>();
-        Extra_Objective = FindAnyObjectByType<Extra_Objectives>();
+        extra_objective = FindAnyObjectByType<Extra_Objectives>();
+        settings = FindAnyObjectByType<Settings>();
         Timer_cs = FindAnyObjectByType<Timer>();
 
         Targets_Remaining = GameObject.Find("Targets").transform.childCount;
@@ -67,15 +70,17 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
-        Extra_Objective.all_text.transform.localScale = Vector3.zero;
+        extra_objective.all_text.transform.localScale = Vector3.zero;
         respawn_pos = transform.position;
 
-        Extra_Objective.collectables = 0;
-        Extra_Objective.pots = 0;
+        extra_objective.collectables = 0;
+        extra_objective.pots = 0;
 
-        //Extra_Objective.current_lvl = SceneManager.GetActiveScene().name;
+        settings.Setting_EO(SceneManager.GetActiveScene().name);
+
+        //extra_objective.current_lvl = SceneManager.GetActiveScene().name;
         //current_lvl = SceneManager.GetActiveScene().name;
-        //if (Extra_Objective.tar_air == false)
+        //if (extra_objective.tar_air == false)
         //{
 
         //}
@@ -170,7 +175,7 @@ public class Player : MonoBehaviour
                 //target_hitted++;
                 //if (target_hitted >= 2)
                 //{
-                //    Extra_Objective.two_tar = true;
+                //    extra_objective.two_tar = true;
                 //}
                 //if (Physics.Raycast(Fire_Point.position, Camera.main.transform.forward, out hit, 100) && PU_pierce > 0)
                 //{
@@ -181,7 +186,7 @@ public class Player : MonoBehaviour
                 //    {
                 //        Hit_target(hit_GO);
                 //        Update_Score(2);
-                //        Extra_Objective.two_tar = true;
+                //        extra_objective.two_tar = true;
                 //    }
                 //}
             }
@@ -189,8 +194,8 @@ public class Player : MonoBehaviour
             {
                 hit_GO.SetActive(false);
                 Update_Score(1);
-                Extra_Objective.pots++;
-                Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
+                extra_objective.pots++;
+                extra_objective.Check_EO(Extra_Objectives.EO_Types.Other); //
             }
             //else if (hit_GO.CompareTag("Pierce"))
             //{
@@ -229,8 +234,8 @@ public class Player : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Update_Score(1);
-            Extra_Objective.collectables++;
-            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Other); //
+            extra_objective.collectables++;
+            extra_objective.Check_EO(Extra_Objectives.EO_Types.Other); //
             Instantiate(Collect_Effect, other.GetComponent<SphereCollider>().transform.position, Quaternion.identity);
         }
         else if (other.CompareTag("Checkpoint"))
@@ -249,7 +254,7 @@ public class Player : MonoBehaviour
     {
         Targets_Remaining--;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
-        Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Target);
+        extra_objective.Check_EO(Extra_Objectives.EO_Types.Target);
 
         if (Targets_Remaining <= 0) // win
         {
@@ -257,10 +262,10 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             game_controller.can_open_setting = false;
-            Extra_Objective.Check_EO(Extra_Objectives.EO_Types.Timer);
+            extra_objective.Check_EO(Extra_Objectives.EO_Types.Timer);
 
             //current_lvl = SceneManager.GetActiveScene().name;
-            //Extra_Objective.Set_Completed_EO(current_lvl);
+            //extra_objective.Set_Completed_EO(current_lvl);
             current_lvl = SceneManager.GetActiveScene().name;
 
             if (current_lvl == "Lvl_1")
@@ -295,7 +300,7 @@ public class Player : MonoBehaviour
             }
             Time.timeScale = 0;
 
-            //Extra_Objective.beat_lvl = true;
+            //extra_objective.beat_lvl = true;
             //target_hitted = 1;
         }
     }

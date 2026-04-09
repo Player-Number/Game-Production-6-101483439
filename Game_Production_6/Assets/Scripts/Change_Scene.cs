@@ -41,7 +41,7 @@ public class Change_Scene : MonoBehaviour
     {
         SceneManager.LoadScene(name);
         //game_controller.Check_Scene(name);
-        //Extra_Objective.all_text.transform.localScale = Vector3.zero;
+        //extra_objective.all_text.transform.localScale = Vector3.zero;
         if (name == "Controls") // name == "How_Play" || 
         {
             Audio_Manager.Play_Music(Audio_Manager.Other_Menu);
@@ -72,35 +72,35 @@ public class Change_Scene : MonoBehaviour
         Audio_Manager.Play_SFX_Button_Pressed();
         //else if (name == "Lvl_Select")
         //{
-        //    Extra_Objective.all_text.transform.localScale = Vector3.one;
+        //    extra_objective.all_text.transform.localScale = Vector3.one;
 
-        //    //for (int i = 0; i < Extra_Objective.all_text.transform.childCount; i++)
+        //    //for (int i = 0; i < extra_objective.all_text.transform.childCount; i++)
         //    //{
         //    //    Debug.Log(i);
-        //    //    Extra_Objective.all_text.transform.GetChild(i).gameObject.SetActive(true);
+        //    //    extra_objective.all_text.transform.GetChild(i).gameObject.SetActive(true);
         //    //}
-        //    //Extra_Objective.all_text.SetActive(true);
-        //    //if (Extra_Objective.L1_T == true)
+        //    //extra_objective.all_text.SetActive(true);
+        //    //if (extra_objective.L1_T == true)
         //    //    GameObject.Find("L1 15 sec").GetComponent<TMP_Text>().color = Color.gray;
-        //    //if (Extra_Objective.L1_C == true)
+        //    //if (extra_objective.L1_C == true)
         //    //    GameObject.Find("L1 2 spheres").GetComponent<TMP_Text>().color = Color.gray;
-        //    //if (Extra_Objective.L1_P == true)
+        //    //if (extra_objective.L1_P == true)
         //    //{
         //    //    GameObject.Find("L1 3 pots").GetComponent<TMP_Text>().color = Color.gray;
-        //    //    Debug.Log("Extra_Objective.L1_P == true");
+        //    //    Debug.Log("extra_objective.L1_P == true");
         //    //}
 
         //}
         //if (name != "Lvl_Select")
         //{
-        //    Extra_Objective.all_text.transform.localScale = Vector3.zero;
-        //    //for (int i = 0; i < Extra_Objective.all_text.transform.childCount; i++)
+        //    extra_objective.all_text.transform.localScale = Vector3.zero;
+        //    //for (int i = 0; i < extra_objective.all_text.transform.childCount; i++)
         //    //{
         //    //    Debug.Log(i);
-        //    //    Extra_Objective.all_text.transform.GetChild(i).gameObject.SetActive(false);
+        //    //    extra_objective.all_text.transform.GetChild(i).gameObject.SetActive(false);
         //    //}
 
-        //    //Extra_Objective.all_text.SetActive(false);
+        //    //extra_objective.all_text.SetActive(false);
 
         //}
         //else if (name == "Game_Scene")

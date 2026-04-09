@@ -63,9 +63,9 @@ public class Extra_Objectives : MonoBehaviour
         
     //}
 
-    //public void Get_current_lvl(string lvl)
+    //public void Get_current_lvl(string Lvl)
     //{
-    //    current_lvl = lvl;
+    //    current_lvl = Lvl;
     //    //if (current_lvl == "Lvl_1")
     //    //{
     //    //    collectables = 2;
@@ -88,9 +88,9 @@ public class Extra_Objectives : MonoBehaviour
     //    //}
     //}
 
-    //public void Set_Completed_EO(string lvl)
+    //public void Set_Completed_EO(string Lvl)
     //{
-    //    current_lvl = lvl;
+    //    current_lvl = Lvl;
     //    if (current_lvl == "Lvl_1")
     //    {
     //        if (B_L1_T != true)
