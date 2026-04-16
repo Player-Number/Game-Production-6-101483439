@@ -59,13 +59,13 @@ public class Target : MonoBehaviour
         }
         else if (target_type == Target_Types.Ex)
         {
-            StartCoroutine(Explode());
             StartCoroutine(Fuse_ticking(Fuse_mat));
+            StartCoroutine(Explode());
         }
         else if (target_type == Target_Types.FB)
         {
-            StartCoroutine(FB());
             StartCoroutine(Fuse_ticking(Fuse_mat));
+            StartCoroutine(FB());
         }
         else if (target_type == Target_Types.Shoot)
         {
@@ -89,6 +89,7 @@ public class Target : MonoBehaviour
         //FB_Effect.SetActive(true);
         //FB_vfx.gameObject.SetActive(true);
         gameObject.SetActive(false);
+        Hitbox(true); // for how play
     }
     IEnumerator Explode()
     {
@@ -97,19 +98,15 @@ public class Target : MonoBehaviour
         ParticleSystem Ex_vfx_inst = Instantiate(Ex_vfx, transform.position, Quaternion.identity);
         Ex_vfx_inst.Play();
         foreach (GameObject go in Obj_to_destory)
-        {
             go.SetActive(false);
-        }
         gameObject.SetActive(false);
+        Hitbox(true);
     }
 
     IEnumerator Fuse_ticking(Material fuse_mat_ticking)
     {
         //player.Destoryed_Target();
-
-        BoxCollider[] all_colliders = GetComponentsInChildren<BoxCollider>();
-        foreach (BoxCollider hitboxs in all_colliders)
-            hitboxs.enabled = false;
+        Hitbox(false);
         for (int i = 0; i < 10; i++)
         {
             Outer.GetComponent<MeshRenderer>().material = fuse_mat_ticking;
@@ -138,6 +135,12 @@ public class Target : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void Hitbox(bool b)
+    {
+        BoxCollider[] all_colliders = GetComponentsInChildren<BoxCollider>();
+        foreach (BoxCollider hitboxs in all_colliders)
+            hitboxs.enabled = b;
+    }
     //IEnumerator Explode()
     //{
     //    player.Destoryed_Target();
