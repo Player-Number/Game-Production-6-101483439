@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     Audio_Manager audio_manager;
     Extra_Objectives extra_objective;
     Settings settings;
-    Timer Timer_cs;
+    //Timer Timer_cs;
     //public GameObject Door;
 
     public GameObject Lose_Screen;
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         audio_manager = FindAnyObjectByType<Audio_Manager>();
         extra_objective = FindAnyObjectByType<Extra_Objectives>();
         settings = FindAnyObjectByType<Settings>();
-        Timer_cs = FindAnyObjectByType<Timer>();
+        //Timer_cs = FindAnyObjectByType<Timer>();
 
         Targets_Remaining = GameObject.Find("Targets").transform.childCount;
         Targets_Text.text = "Targets Remaining: " + (Targets_Remaining);
@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
         extra_objective.all_text.transform.localScale = Vector3.zero;
         respawn_pos = transform.position;
 
@@ -77,6 +76,7 @@ public class Player : MonoBehaviour
         extra_objective.pots = 0;
 
         settings.Setting_EO(SceneManager.GetActiveScene().name);
+        FindAnyObjectByType<Change_Scene>().Setting_Buttons_In_Game();
 
         //extra_objective.current_lvl = SceneManager.GetActiveScene().name;
         //current_lvl = SceneManager.GetActiveScene().name;

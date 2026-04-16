@@ -6,17 +6,15 @@ using UnityEngine.UI;
 
 public class Player_Movement : MonoBehaviour
 {
+    [SerializeField] ParticleSystem Jump_VFX;
     //[SerializeField] Slider Dash_cool_bar;
     //[SerializeField] GameObject Dash_cool_bar_fill;
     //[SerializeField] float Speedlines_emission_rate;
     //public ParticleSystem Speedlines;
-    [SerializeField] ParticleSystem Jump_VFX;
-    public Camera Cam;
 
     Rigidbody rb;
-    //Settings Settings;
-    //GameObject game_controller;
 
+    public Camera Cam;
     public Transform Orientation;
     public Movement_State state;
 
@@ -24,6 +22,8 @@ public class Player_Movement : MonoBehaviour
     float horizontal_input;
     float vertical_input;
 
+    //Settings Settings;
+    //GameObject game_controller;
     //bool no_cool = false;
 
     [Header("Speed")]
@@ -37,15 +37,6 @@ public class Player_Movement : MonoBehaviour
     public float jump_force;
     public float jump_cool;
     bool ready_to_jump = true;
-
-    //[Header("Dashing")]
-    //public float dash_force;
-    //public float dash_speed;
-    //public float dash_cool;
-    ////float dash_cool_timer = 2;
-    ////bool is_dashing = false;
-    //public float dash_duration = 0.2f;
-    //public float dash_force_up;
 
     [Header("Ground Check")]
     public float player_height;
@@ -61,17 +52,29 @@ public class Player_Movement : MonoBehaviour
     public float current_FOV_velocity = 60f;
     public float smooth_time = 0.5f;
 
+    //[Header("Dashing")]
+    //public float dash_force;
+    //public float dash_speed;
+    //public float dash_cool;
+    ////float dash_cool_timer = 2;
+    ////bool is_dashing = false;
+    //public float dash_duration = 0.2f;
+    //public float dash_force_up;
+
     public enum Movement_State
     {
+        Still,
         Running,
-        Dashing,
         Airborne
+        //Dashing,
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         og_move_speed = move_speed;
+        Jump_VFX.gameObject.transform.SetParent(null);
+        Jump_VFX.Stop();
         //Settings = FindAnyObjectByType<Settings>();
         //Settings.FOV_On_Val_Changed();
         //Dash_cool_bar.maxValue = dash_cool;
@@ -83,7 +86,7 @@ public class Player_Movement : MonoBehaviour
         Player_Input();
         FOV_based_on_Speed();
         Move_Cap();
-        //State_Handler();
+        State_Handler();
         //if (Input.GetKeyDown(KeyCode.Mouse1))
         //    Dash();
 
@@ -131,25 +134,23 @@ public class Player_Movement : MonoBehaviour
         is_grounded = Physics.Raycast(transform.position, Vector3.down, player_height * 0.5f + 0.15f, ground_layer);
     }
 
-    //void State_Handler()
-    //{
-    //    if (is_grounded)
-    //    {
-    //        state = Movement_State.Running;
-    //        move_speed = og_move_speed;
-    //    }
-    //    //else if (is_dashing)
-    //    //{
-    //    //    state = Movement_State.Dashing;
-    //    //    move_speed = dash_speed;
-    //    //}
-    //    else
-    //        move_speed = og_move_speed;
-    //    //else
-    //    //{
-    //    //    state = Movement_State.Airborne;
-    //    //}
-    //}
+    void State_Handler()
+    {
+        if (is_grounded)
+        {
+            state = Movement_State.Running;
+            move_speed = og_move_speed;
+        }
+        else
+            state = Movement_State.Airborne;
+        //else
+        //    move_speed = og_move_speed;
+        //else if (is_dashing)
+        //{
+        //    state = Movement_State.Dashing;
+        //    move_speed = dash_speed;
+        //}
+    }
 
     void Player_Input()
     {
@@ -160,8 +161,8 @@ public class Player_Movement : MonoBehaviour
         {
             Jump(jump_force);
             ready_to_jump = false;
-            //Jump_VFX.transform.position = new(transform.position.x, transform.position.y - 1, transform.position.z);
-            //Jump_VFX.Play();
+            Jump_VFX.gameObject.transform.position = new(transform.position.x, transform.position.y - 1, transform.position.z);
+            Jump_VFX.Play();
             //Invoke(nameof(Reset_Jump), jump_cool);
         }
     }
@@ -188,49 +189,6 @@ public class Player_Movement : MonoBehaviour
     {
         ready_to_jump = true;
     }
-
-    //void Dash()
-    //{
-    //    if (dash_cool_timer > 0) return;
-    //    else dash_cool_timer = dash_cool;
-    //    Vector3 force_to_apply = Cam.gameObject.transform.forward * dash_force + Orientation.up * dash_force_up;
-    //    rb.AddForce(force_to_apply, ForceMode.Impulse);
-    //    Invoke(nameof(Reset_Dash), dash_duration);
-    //    is_dashing = true;
-    //    rb.useGravity = false;
-    //    //Vector3 dir = Get_Dir(Cam.gameObject.transform);
-    //    //delay_force_to_apply = force_to_apply;
-    //    //Invoke(nameof(force_to_apply), 0.02f);
-
-    //}
-
-    //void Reset_Dash()
-    //{
-    //    rb.linearVelocity = Vector3.zero;
-    //    is_dashing = false;
-    //    rb.useGravity = true;
-    //    //Speedlines.SetActive(false);
-    //}
-    //private Vector3 delay_force_to_apply;
-    //void Delay_Dash_Force()
-    //{
-    //    rb.AddForce(delay_force_to_apply, ForceMode.Impulse);
-    //}
-
-    //Vector3 Get_Dir(Transform forward_T)
-    //{
-    //    float horizontal_input = Input.GetAxisRaw("Horizontal");
-    //    float vertical_input = Input.GetAxisRaw("Vertical");
-
-    //    Vector3 dir;
-
-    //    dir = forward_T.forward;
-
-    //    if (horizontal_input == 0 && vertical_input == 0)
-    //        dir = forward_T.forward;
-
-    //    return dir;//.normalized;
-    //}
 
     void FOV_based_on_Speed()
     {
@@ -289,5 +247,48 @@ public class Player_Movement : MonoBehaviour
     //    {
     //        is_grounded = false;
     //    }
+    //}
+
+    //void Dash()
+    //{
+    //    if (dash_cool_timer > 0) return;
+    //    else dash_cool_timer = dash_cool;
+    //    Vector3 force_to_apply = Cam.gameObject.transform.forward * dash_force + Orientation.up * dash_force_up;
+    //    rb.AddForce(force_to_apply, ForceMode.Impulse);
+    //    Invoke(nameof(Reset_Dash), dash_duration);
+    //    is_dashing = true;
+    //    rb.useGravity = false;
+    //    //Vector3 dir = Get_Dir(Cam.gameObject.transform);
+    //    //delay_force_to_apply = force_to_apply;
+    //    //Invoke(nameof(force_to_apply), 0.02f);
+
+    //}
+
+    //void Reset_Dash()
+    //{
+    //    rb.linearVelocity = Vector3.zero;
+    //    is_dashing = false;
+    //    rb.useGravity = true;
+    //    //Speedlines.SetActive(false);
+    //}
+    //private Vector3 delay_force_to_apply;
+    //void Delay_Dash_Force()
+    //{
+    //    rb.AddForce(delay_force_to_apply, ForceMode.Impulse);
+    //}
+
+    //Vector3 Get_Dir(Transform forward_T)
+    //{
+    //    float horizontal_input = Input.GetAxisRaw("Horizontal");
+    //    float vertical_input = Input.GetAxisRaw("Vertical");
+
+    //    Vector3 dir;
+
+    //    dir = forward_T.forward;
+
+    //    if (horizontal_input == 0 && vertical_input == 0)
+    //        dir = forward_T.forward;
+
+    //    return dir;//.normalized;
     //}
 }
